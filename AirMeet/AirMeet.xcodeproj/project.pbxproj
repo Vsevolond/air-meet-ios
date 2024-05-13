@@ -16,6 +16,13 @@
 		D3618C482BC6D83B00C5B4D9 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3618C472BC6D83B00C5B4D9 /* DetailsViewController.swift */; };
 		D3618C4B2BC70AF000C5B4D9 /* DetailCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3618C4A2BC70AF000C5B4D9 /* DetailCollectionCell.swift */; };
 		D3618C4D2BC70AF900C5B4D9 /* DetailAgeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3618C4C2BC70AF900C5B4D9 /* DetailAgeCollectionCell.swift */; };
+		D37C7D7F2BECCD7000E6599A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D7E2BECCD7000E6599A /* Settings.swift */; };
+		D37C7D852BF0EAE800E6599A /* CGSize-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */; };
+		D37C7D892BF1013C00E6599A /* HobbiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D882BF1013C00E6599A /* HobbiesView.swift */; };
+		D38036332BE4153200A1D345 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38036322BE4153200A1D345 /* MainContainer.swift */; };
+		D380363A2BE4174200A1D345 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38036392BE4174200A1D345 /* SettingsViewController.swift */; };
+		D380363C2BE4177800A1D345 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380363B2BE4177800A1D345 /* ChatsViewController.swift */; };
+		D380363E2BE4179D00A1D345 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380363D2BE4179D00A1D345 /* SearchViewController.swift */; };
 		D3B28EE92BC6933A00C058D8 /* UIView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EE82BC6933A00C058D8 /* UIView-Extensions.swift */; };
 		D3B28EEE2BC6940000C058D8 /* MeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EED2BC6940000C058D8 /* MeetViewController.swift */; };
 		D3B28EF02BC696E300C058D8 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EEF2BC696E300C058D8 /* AppColor.swift */; };
@@ -48,6 +55,13 @@
 		D3618C472BC6D83B00C5B4D9 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		D3618C4A2BC70AF000C5B4D9 /* DetailCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionCell.swift; sourceTree = "<group>"; };
 		D3618C4C2BC70AF900C5B4D9 /* DetailAgeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAgeCollectionCell.swift; sourceTree = "<group>"; };
+		D37C7D7E2BECCD7000E6599A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize-Extensions.swift"; sourceTree = "<group>"; };
+		D37C7D882BF1013C00E6599A /* HobbiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbiesView.swift; sourceTree = "<group>"; };
+		D38036322BE4153200A1D345 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
+		D38036392BE4174200A1D345 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D380363B2BE4177800A1D345 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		D380363D2BE4179D00A1D345 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D3B28EE82BC6933A00C058D8 /* UIView-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extensions.swift"; sourceTree = "<group>"; };
 		D3B28EED2BC6940000C058D8 /* MeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetViewController.swift; sourceTree = "<group>"; };
 		D3B28EEF2BC696E300C058D8 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
@@ -108,8 +122,9 @@
 		D3293BC82BC1A59B001A9FC9 /* AirMeet */ = {
 			isa = PBXGroup;
 			children = (
+				D3F425C12BD6C3CD008AF954 /* Main */,
 				D3F425BE2BD31756008AF954 /* Helpers */,
-				D3DFE8E22BD022B9000C6168 /* CustomComponents */,
+				D3DFE8E22BD022B9000C6168 /* Custom-Components */,
 				D3DFE8DB2BCF1047000C6168 /* Entities */,
 				D3B28EEA2BC6935500C058D8 /* Onboarding */,
 				D3B28EE72BC6930600C058D8 /* Extensions */,
@@ -129,6 +144,32 @@
 				D3DFE8D92BCEB806000C6168 /* DetailHobbiesViewController.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		D38036362BE416EA00A1D345 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D38036392BE4174200A1D345 /* SettingsViewController.swift */,
+				D37C7D7E2BECCD7000E6599A /* Settings.swift */,
+				D37C7D882BF1013C00E6599A /* HobbiesView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D38036372BE416F000A1D345 /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				D380363B2BE4177800A1D345 /* ChatsViewController.swift */,
+			);
+			path = Chats;
+			sourceTree = "<group>";
+		};
+		D38036382BE416FC00A1D345 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D380363D2BE4179D00A1D345 /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		D3B28EE42BC6928C00C058D8 /* App */ = {
@@ -159,6 +200,7 @@
 				D3F425B82BD2E52F008AF954 /* UIImage-Extensions.swift */,
 				D3F425BA2BD3023A008AF954 /* String-Extensions.swift */,
 				D3F425BC2BD3131B008AF954 /* NotificationCenter-Extensions.swift */,
+				D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,12 +234,12 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		D3DFE8E22BD022B9000C6168 /* CustomComponents */ = {
+		D3DFE8E22BD022B9000C6168 /* Custom-Components */ = {
 			isa = PBXGroup;
 			children = (
 				D3DFE8E32BD022C9000C6168 /* RoundedImageView.swift */,
 			);
-			path = CustomComponents;
+			path = "Custom-Components";
 			sourceTree = "<group>";
 		};
 		D3DFE8E52BD02BEF000C6168 /* Photo */ = {
@@ -215,6 +257,17 @@
 				D3F425BF2BD317F0008AF954 /* AccountHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D3F425C12BD6C3CD008AF954 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D38036322BE4153200A1D345 /* MainContainer.swift */,
+				D38036382BE416FC00A1D345 /* Search */,
+				D38036372BE416F000A1D345 /* Chats */,
+				D38036362BE416EA00A1D345 /* Settings */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		EC99F080419E5256E456F4A6 /* Frameworks */ = {
@@ -341,14 +394,19 @@
 			files = (
 				D3B28EEE2BC6940000C058D8 /* MeetViewController.swift in Sources */,
 				D3F425BD2BD3131B008AF954 /* NotificationCenter-Extensions.swift in Sources */,
+				D380363E2BE4179D00A1D345 /* SearchViewController.swift in Sources */,
 				D3B28EF42BC6997B00C058D8 /* CGColor-Extensions.swift in Sources */,
+				D380363C2BE4177800A1D345 /* ChatsViewController.swift in Sources */,
 				D3DFE8E72BD02C0B000C6168 /* PhotoEditorViewController.swift in Sources */,
 				D3618C482BC6D83B00C5B4D9 /* DetailsViewController.swift in Sources */,
 				D3618C4D2BC70AF900C5B4D9 /* DetailAgeCollectionCell.swift in Sources */,
 				D3DFE8DA2BCEB806000C6168 /* DetailHobbiesViewController.swift in Sources */,
+				D380363A2BE4174200A1D345 /* SettingsViewController.swift in Sources */,
 				D3DFE8DF2BCFED56000C6168 /* Account.swift in Sources */,
 				D3293BCE2BC1A59B001A9FC9 /* ViewController.swift in Sources */,
+				D37C7D892BF1013C00E6599A /* HobbiesView.swift in Sources */,
 				D3DFE8DD2BCF1059000C6168 /* Hobbie.swift in Sources */,
+				D38036332BE4153200A1D345 /* MainContainer.swift in Sources */,
 				D3618C4B2BC70AF000C5B4D9 /* DetailCollectionCell.swift in Sources */,
 				D3DFE8E42BD022C9000C6168 /* RoundedImageView.swift in Sources */,
 				D3B28EE92BC6933A00C058D8 /* UIView-Extensions.swift in Sources */,
@@ -359,6 +417,8 @@
 				D3DFE8D72BCEB0EF000C6168 /* DetailHobbiesCollectionCell.swift in Sources */,
 				D3DFE8E12BD00370000C6168 /* PhotoViewController.swift in Sources */,
 				D3B28EF22BC698F400C058D8 /* UIColor-Extensions.swift in Sources */,
+				D37C7D852BF0EAE800E6599A /* CGSize-Extensions.swift in Sources */,
+				D37C7D7F2BECCD7000E6599A /* Settings.swift in Sources */,
 				D3F425B92BD2E52F008AF954 /* UIImage-Extensions.swift in Sources */,
 				D3B28EF02BC696E300C058D8 /* AppColor.swift in Sources */,
 			);

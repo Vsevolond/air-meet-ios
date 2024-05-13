@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let data = UserDefaults.standard.object(forKey: .accountKey) as? Data,
            let account = try? JSONDecoder().decode(Account.self, from: data) 
         {
-            window?.rootViewController = ViewController()
+            let mainViewController = MainContainer.build(with: account)
+            window?.rootViewController = mainViewController
             
         } else {
             window?.rootViewController = MeetViewController()

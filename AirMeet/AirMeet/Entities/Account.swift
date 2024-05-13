@@ -29,6 +29,8 @@ final class Account: Codable {
     var hobbies: [Hobbie]
     var image: UIImage?
     
+    var fullName: String { "\(name) \(surname)"}
+    
     // MARK: - Initializers
     
     init(name: String, surname: String, age: Int, hobbies: [Hobbie], image: UIImage? = nil) {

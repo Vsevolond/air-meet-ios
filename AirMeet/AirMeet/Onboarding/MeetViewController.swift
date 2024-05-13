@@ -100,10 +100,14 @@ final class MeetViewController: UIViewController {
     
     @objc private func didUserSignedUp(notification: Notification) {
         guard let account = notification.object as? Account else { return }
-        print(account.name)
         
         onboardingNavigationController.popToRootViewController(animated: true)
         onboardingNavigationController.dismiss(animated: true)
+        
+        let mainViewController = MainContainer.build(with: account)
+        mainViewController.modalPresentationStyle = .fullScreen
+        mainViewController.modalTransitionStyle = .crossDissolve
+        present(mainViewController, animated: true)
     }
 }
 
