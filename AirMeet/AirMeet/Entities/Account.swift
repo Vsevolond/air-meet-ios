@@ -51,6 +51,6 @@ final class Account: Codable, ObservableObject {
         try container.encode(name, forKey: .name)
         try container.encode(surname, forKey: .surname)
         try container.encode(birthdate, forKey: .birthdate)
-        try container.encode(hobbies, forKey: .hobbies)
+        try container.encode(hobbies.map { $0.title }, forKey: .hobbies)
     }
 }
