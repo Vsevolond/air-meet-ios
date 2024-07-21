@@ -1,52 +1,46 @@
-import UIKit
-import Combine
+import SwiftUI
 
 // MARK: - Account
 
-final class Account: Codable {
+final class Account: Codable, ObservableObject {
     
     // MARK: - Type Properties
     
     private enum CodingKeys: String, CodingKey {
         
-        case name
-        case surname
-        case age
-        case hobbies
+        case name, surname, birthdate, hobbies
     }
-    
-    // MARK: - Private Properties
-    
-    private var isValid: Bool { !name.isEmpty && !surname.isEmpty }
     
     // MARK: - Internal Properties
     
-    var validSubject: CurrentValueSubject<Bool, Never> = .init(false)
-    
-    var name: String { didSet { validSubject.send(isValid) } }
-    var surname: String { didSet { validSubject.send(isValid) } }
-    var age: Int
-    var hobbies: [Hobbie]
-    var image: UIImage?
+    @Published var name: String
+    @Published var surname: String
+    @Published var birthdate: Date
+    @Published var hobbies: [Hobbie]
+    @Published var image: UIImage?
+    var age: Int { return 1 }
     
     var fullName: String { "\(name) \(surname)"}
     
+    var discoveryInfo: AccountInfo { .init(name: name, surname: surname, age: age) }
+    
     // MARK: - Initializers
     
-    init(name: String, surname: String, age: Int, hobbies: [Hobbie], image: UIImage? = nil) {
+    init(name: String = "", surname: String = "", birthdate: Date = .now, hobbies: [Hobbie] = [], image: UIImage? = nil) {
         self.name = name
         self.surname = surname
-        self.age = age
+        self.birthdate = birthdate
         self.hobbies = hobbies
         self.image = image
     }
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
         self.name = try container.decode(String.self, forKey: .name)
         self.surname = try container.decode(String.self, forKey: .surname)
-        self.age = try container.decode(Int.self, forKey: .age)
-        self.hobbies = try container.decode([String].self, forKey: .hobbies).compactMap { Hobbie(rawValue: $0) }
+        self.birthdate = try container.decode(Date.self, forKey: .birthdate)
+        self.hobbies = try container.decode([String].self, forKey: .hobbies).compactMap { Hobbie(from: $0) }
     }
     
     // MARK: - Internal Methods
@@ -56,7 +50,7 @@ final class Account: Codable {
         
         try container.encode(name, forKey: .name)
         try container.encode(surname, forKey: .surname)
-        try container.encode(age, forKey: .age)
+        try container.encode(birthdate, forKey: .birthdate)
         try container.encode(hobbies, forKey: .hobbies)
     }
 }

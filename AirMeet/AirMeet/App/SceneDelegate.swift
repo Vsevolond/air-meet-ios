@@ -1,11 +1,4 @@
-//
-//  SceneDelegate.swift
-//  AirMeet
-//
-//  Created by Всеволод Донченко on 06.04.2024.
-//
-
-import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,9 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
-        
         window = .init(windowScene: scene)
-        window?.overrideUserInterfaceStyle = .light
         
         if let data = UserDefaults.standard.object(forKey: .accountKey) as? Data,
            let account = try? JSONDecoder().decode(Account.self, from: data) 
@@ -28,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = mainViewController
             
         } else {
-            window?.rootViewController = MeetViewController()
+            let onboardingViewController = UIHostingController(rootView: MeetView())
+            window?.rootViewController = onboardingViewController
         }
         
         window?.makeKeyAndVisible()

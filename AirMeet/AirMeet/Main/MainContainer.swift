@@ -1,11 +1,20 @@
 import UIKit
+import SwiftUI
 
 // MARK: - Main Container
 
 final class MainContainer {
     
     static func build(with account: Account) -> UIViewController {
-        let searchViewController = SearchViewController()
+        if account.image == nil {
+            account.image = AccountHelper.shared.getImage()
+        }
+        
+        let connectivityManager = ConnectivityManager(discoveryInfo: account.discoveryInfo.dict)
+        
+        let searchModel = SearchModel(manager: connectivityManager)
+        let searchView = SearchView(model: searchModel)
+        let searchViewController = UIHostingController(rootView: searchView)
         searchViewController.tabBarItem.title = Constants.searchTitle
         searchViewController.tabBarItem.image = .init(systemName: Constants.searchImageName)
         
@@ -13,7 +22,8 @@ final class MainContainer {
         chatsViewController.tabBarItem.title = Constants.chatsTitle
         chatsViewController.tabBarItem.image = .init(systemName: Constants.chatsImageName)
         
-        let settingsViewController = SettingsViewController(account: account)
+        let settingsView = SettingsView(account: account)
+        let settingsViewController = UIHostingController(rootView: settingsView)
         settingsViewController.tabBarItem.title = Constants.settingsTitle
         settingsViewController.tabBarItem.image = .init(systemName: Constants.settingsImageName)
         

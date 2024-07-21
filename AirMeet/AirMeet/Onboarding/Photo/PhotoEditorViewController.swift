@@ -20,7 +20,7 @@ final class PhotoEditorViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private var image: UIImage
+    private var image: UIImage?
     private var imageOffset: CGPoint = .zero
     private var imageZoomScale: CGFloat = .zero
     
@@ -34,7 +34,7 @@ final class PhotoEditorViewController: UIViewController {
     
     // MARK: - Initializers
     
-    init(image: UIImage) {
+    init(image: UIImage?) {
         self.image = image
         super.init(nibName: nil, bundle: nil)
     }
@@ -64,7 +64,7 @@ final class PhotoEditorViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setup() {
-        view.backgroundColor = .appColor(.black)
+        view.backgroundColor = .black
         
         scrollView.delegate = self
         scrollView.showsVerticalScrollIndicator = false
@@ -73,19 +73,23 @@ final class PhotoEditorViewController: UIViewController {
         cropView.isUserInteractionEnabled = false
         maskView.isUserInteractionEnabled = false
         
-        var cancelConfiguration = UIButton.Configuration.plain()
-        cancelConfiguration.image = UIImage(systemName: Constants.cancelImageName,
-                                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 24))
-        cancelConfiguration.baseForegroundColor = .appColor(.white)
-        cancelConfiguration.imagePlacement = .all
+        let textAttributes = AttributeContainer([.font : UIFont.boldSystemFont(ofSize: 16)])
+        
+        var cancelConfiguration = UIButton.Configuration.filled()
+        cancelConfiguration.cornerStyle = .capsule
+        cancelConfiguration.attributedTitle = .init(Constants.cancelTitle, attributes: textAttributes)
+        cancelConfiguration.baseBackgroundColor = .secondaryLabel
+        cancelConfiguration.baseForegroundColor = .white
+        cancelConfiguration.imagePlacement = .leading
         cancelButton.configuration = cancelConfiguration
         cancelButton.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
         
-        var doneConfiguration = UIButton.Configuration.plain()
-        doneConfiguration.image = UIImage(systemName: Constants.doneImageName,
-                                          withConfiguration: UIImage.SymbolConfiguration(pointSize: 24))
-        doneConfiguration.baseForegroundColor = .appColor(.cyan)
-        doneConfiguration.imagePlacement = .all
+        var doneConfiguration = UIButton.Configuration.filled()
+        doneConfiguration.cornerStyle = .capsule
+        doneConfiguration.attributedTitle = .init(Constants.doneTitle, attributes: textAttributes)
+        doneConfiguration.baseBackgroundColor = .systemBlue
+        doneConfiguration.baseForegroundColor = .white
+        doneConfiguration.imagePlacement = .leading
         doneButton.configuration = doneConfiguration
         doneButton.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
         
@@ -98,7 +102,7 @@ final class PhotoEditorViewController: UIViewController {
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaInsets.top)
             make.width.equalToSuperview()
-            make.bottom.equalToSuperview().inset(100)
+            make.bottom.equalTo(view.safeAreaInsets.bottom).inset(100)
         }
         
         imageView.snp.makeConstraints { make in
@@ -106,10 +110,7 @@ final class PhotoEditorViewController: UIViewController {
         }
         
         maskView.snp.makeConstraints { make in
-            make.leading.equalTo(scrollView.snp.leading)
-            make.top.equalTo(scrollView.snp.top)
-            make.trailing.equalTo(scrollView.snp.trailing)
-            make.bottom.equalTo(scrollView.snp.bottom)
+            make.edges.equalTo(scrollView)
         }
         
         cropView.snp.makeConstraints { make in
@@ -122,18 +123,19 @@ final class PhotoEditorViewController: UIViewController {
             make.top.equalTo(scrollView.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(20)
             make.width.lessThanOrEqualTo(view.snp.width).dividedBy(2)
-            make.height.equalTo(60)
+            make.height.equalTo(30)
         }
         
         doneButton.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.bottom).offset(10)
             make.right.equalToSuperview().inset(20)
             make.width.lessThanOrEqualTo(view.snp.width).dividedBy(2)
-            make.height.equalTo(60)
+            make.height.equalTo(30)
         }
     }
     
     private func setImage() {
+        guard let image else { return }
         imageView.image = image
         
         let scale = max(cropView.frame.width / image.size.width, cropView.frame.height / image.size.height)
@@ -170,6 +172,8 @@ final class PhotoEditorViewController: UIViewController {
     }
     
     private func getImageCropRect() -> CGRect {
+        guard let image else { return .zero }
+        
         let imageScale: CGFloat = min(image.size.width / cropView.frame.width, image.size.height / cropView.frame.height)
         let zoomFactor = 1 / imageZoomScale
         
@@ -188,6 +192,7 @@ final class PhotoEditorViewController: UIViewController {
     }
     
     @objc private func didTapDoneButton() {
+        guard let image else { return }
         doneButton.isEnabled = false
         
         let cropRect = getImageCropRect().integral
@@ -219,6 +224,6 @@ extension PhotoEditorViewController: UIScrollViewDelegate {
 
 private enum Constants {
     
-    static let cancelImageName: String = "xmark.circle"
-    static let doneImageName: String = "checkmark.circle.fill"
+    static let cancelTitle: String = "Отменить"
+    static let doneTitle: String = "Готово"
 }
