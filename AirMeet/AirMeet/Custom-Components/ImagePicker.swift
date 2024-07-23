@@ -27,6 +27,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> some UIViewController {
         let viewController = PHPickerViewController(configuration: config)
+        viewController.modalPresentationStyle = .currentContext
         viewController.delegate = context.coordinator
         
         return viewController

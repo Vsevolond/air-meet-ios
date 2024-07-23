@@ -1,11 +1,6 @@
-//
-//  DetailsView.swift
-//  AirMeet
-//
-//  Created by Всеволод Донченко on 09.07.2024.
-//
-
 import SwiftUI
+
+// MARK: - Straight Trapezoid
 
 private struct StraightTrapezoid: Shape {
     
@@ -22,18 +17,28 @@ private struct StraightTrapezoid: Shape {
     }
 }
 
+// MARK: - Details View
+
 struct DetailsView: View {
+    
+    // MARK: - Type Properties
     
     private enum Field {
         
         case name, surname
     }
 
+    // MARK: - Internal Properties
+    
     @ObservedObject var account: Account
     @Binding var isPresented: Bool
     
+    // MARK: - Private Properties
+    
     @FocusState private var focusedField: Field?
     @State private var isFieldsEmpty: Bool = true
+    
+    // MARK: - View Body
     
     var body: some View {
         ScrollView {
@@ -76,7 +81,7 @@ struct DetailsView: View {
             Spacer()
             
             NavigationLink {
-                HobbiesView(account: account, isPresented: $isPresented)
+                HobbiesView(account: account, isPresented: $isPresented, isOnboarding: true)
                 
             } label: {
                 Text(Constants.buttonTitle)
@@ -109,6 +114,8 @@ struct DetailsView: View {
         .navigationBarBackButtonHidden(true)
     }
     
+    // MARK: - Private Methods
+    
     private func InputTextField(_ title: String, text: Binding<String>) -> some View {
         TextField(title, text: text)
             .bold()
@@ -128,9 +135,7 @@ struct DetailsView: View {
     }
 }
 
-//#Preview {
-//    DetailsView(account: .init(), isActive: true)
-//}
+// MARK: - Constants
 
 private enum Constants {
     

@@ -18,7 +18,27 @@ final class Account: Codable, ObservableObject {
     @Published var birthdate: Date
     @Published var hobbies: [Hobbie]
     @Published var image: UIImage?
-    var age: Int { return 1 }
+    
+    var age: Int {
+        Calendar.current.dateComponents([.year], from: birthdate, to: .now).year ?? .zero
+    }
+    
+    var ageString: String {
+        switch age {
+        case let x where [0, 5, 6, 7, 8, 9].contains(x % 10) || (11...14).contains(x): "\(age) лет"
+        case let x where x % 10 == 1: "\(age) год"
+        case let x where (2...4).contains(x % 10): "\(age) года"
+        default: "\(age) лет"
+        }
+    }
+    
+    var birthdateString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "ru")
+        dateFormatter.dateFormat = "dd MMM YYYY"
+        
+        return dateFormatter.string(from: birthdate)
+    }
     
     var fullName: String { "\(name) \(surname)"}
     

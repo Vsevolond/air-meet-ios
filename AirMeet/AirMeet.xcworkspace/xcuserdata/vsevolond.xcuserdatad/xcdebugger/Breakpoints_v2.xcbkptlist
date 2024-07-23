@@ -206,40 +206,10 @@
             filePath = "AirMeet/Onboarding/MeetView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "saveAccount()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "739815BC-29A0-411F-ACB9-0FE818E4637E - 9f28c3e01417b24b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AirMeet.MeetView.saveAccount() -&gt; ()"
-                  moduleName = "AirMeet"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vsevolond/air-meet-ios/AirMeet/AirMeet/Onboarding/MeetView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52">
-               </Location>
-               <Location
-                  uuid = "739815BC-29A0-411F-ACB9-0FE818E4637E - 9f28c3e01417b24b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AirMeet.MeetView.saveAccount() -&gt; ()"
-                  moduleName = "AirMeet"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vsevolond/air-meet-ios/AirMeet/AirMeet/Onboarding/MeetView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -252,8 +222,8 @@
             filePath = "AirMeet/Onboarding/MeetView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "saveAccount()"
             landmarkType = "7">
          </BreakpointContent>
@@ -268,8 +238,8 @@
             filePath = "AirMeet/Onboarding/MeetView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "saveAccount()"
             landmarkType = "7">
          </BreakpointContent>
@@ -288,6 +258,52 @@
             endingLineNumber = "15"
             landmarkName = "scene(_:willConnectTo:options:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C491942-68BB-4340-B9BA-0BBC4DC32611"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirMeet/Main/Profile/ProfileEditorView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "saveAccount()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7C491942-68BB-4340-B9BA-0BBC4DC32611 - a7e97b254fa28cf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AirMeet.ProfileEditorView.saveAccount() -&gt; ()"
+                  moduleName = "AirMeet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vsevolond/air-meet-ios/AirMeet/AirMeet/Main/Profile/ProfileEditorView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186">
+               </Location>
+               <Location
+                  uuid = "7C491942-68BB-4340-B9BA-0BBC4DC32611 - a7e97b254fa28cf1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AirMeet.ProfileEditorView.saveAccount() -&gt; ()"
+                  moduleName = "AirMeet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vsevolond/air-meet-ios/AirMeet/AirMeet/Main/Profile/ProfileEditorView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

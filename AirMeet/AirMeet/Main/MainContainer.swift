@@ -22,14 +22,14 @@ final class MainContainer {
         chatsViewController.tabBarItem.title = Constants.chatsTitle
         chatsViewController.tabBarItem.image = .init(systemName: Constants.chatsImageName)
         
-        let settingsView = SettingsView(account: account)
-        let settingsViewController = UIHostingController(rootView: settingsView)
-        settingsViewController.tabBarItem.title = Constants.settingsTitle
-        settingsViewController.tabBarItem.image = .init(systemName: Constants.settingsImageName)
+        let profileView = ProfileView(account: account)
+        let profileViewController = UIHostingController(rootView: profileView)
+        profileViewController.tabBarItem.title = Constants.settingsTitle
+        profileViewController.tabBarItem.image = .init(systemName: Constants.profileImageName)
         
         let mainTabBarController = UITabBarController()
-        mainTabBarController.tabBar.tintColor = .appColor(.magenta)
-        mainTabBarController.setViewControllers([searchViewController, chatsViewController, settingsViewController], animated: false)
+        mainTabBarController.tabBar.tintColor = .systemBlue
+        mainTabBarController.setViewControllers([searchViewController, chatsViewController, profileViewController], animated: false)
         
         return mainTabBarController
     }
@@ -39,11 +39,11 @@ final class MainContainer {
 
 private enum Constants {
     
-    static let searchTitle: String = "Люди"
+    static let searchTitle: String = "Поиск"
     static let chatsTitle: String = "Чаты"
-    static let settingsTitle: String = "Настройки"
+    static let settingsTitle: String = "Профиль"
     
-    static let searchImageName: String = "person.2.fill"
+    static let searchImageName: String = "magnifyingglass"
     static let chatsImageName: String = "message.fill"
-    static let settingsImageName: String = "gear"
+    static let profileImageName: String = "person.crop.circle.fill"
 }

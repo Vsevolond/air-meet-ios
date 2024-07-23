@@ -2,10 +2,9 @@ import SwiftUI
 
 struct HobbiesView: View {
     
-    @Environment(\.colorScheme) private var colorScheme
-    
     @ObservedObject var account: Account
     @Binding var isPresented: Bool
+    var isOnboarding: Bool
     
     var body: some View {
         VStack {
@@ -108,23 +107,25 @@ struct HobbiesView: View {
             }
             .listStyle(.plain)
             
-            NavigationLink {
-                PhotoPickerView(account: account, isPresented: $isPresented)
-                
-            } label: {
-                Text(account.hobbies.isEmpty ? Constants.notAddButtonTitle : Constants.addButtonTitle)
-                    .frame(width: .screenWidth * 0.75)
-                    .font(.system(size: 18))
-                    .bold()
-                    .padding(10)
-                    .foregroundStyle(.white)
-                    .if(account.hobbies.isEmpty, then: { view in
-                        view.background(.gray.secondary)
-                    }, else: { view in
-                        view.background(.blue)
-                    })
-                    .clipShape(.rect(cornerRadius: 10))
-                    .padding(.bottom, 10)
+            if isOnboarding {
+                NavigationLink {
+                    PhotoPickerView(account: account, isPresented: $isPresented)
+                    
+                } label: {
+                    Text(account.hobbies.isEmpty ? Constants.notAddButtonTitle : Constants.addButtonTitle)
+                        .frame(width: .screenWidth * 0.75)
+                        .font(.system(size: 18))
+                        .bold()
+                        .padding(10)
+                        .foregroundStyle(.white)
+                        .if(account.hobbies.isEmpty, then: { view in
+                            view.background(.gray.secondary)
+                        }, else: { view in
+                            view.background(.blue)
+                        })
+                        .clipShape(.rect(cornerRadius: 10))
+                        .padding(.bottom, 10)
+                }
             }
 
         }

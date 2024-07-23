@@ -1,12 +1,18 @@
 import SwiftUI
 import Lottie
 
+// MARK: - Meet View
+
 struct MeetView: View {
+    
+    // MARK: - Private Properties
     
     @Environment(\.viewController) private var viewController: UIViewController?
     @StateObject private var account: Account = .init()
     @State private var animationMode: LottiePlaybackMode = .paused
     @State private var isOnboardingPresented: Bool = false
+    
+    // MARK: - View Body
     
     var body: some View {
         NavigationStack {
@@ -48,6 +54,8 @@ struct MeetView: View {
         }
     }
     
+    // MARK: - Private Methods
+    
     private func saveAccount() {
         guard let image = account.image, let encoded = try? JSONEncoder().encode(account) else { return }
         
@@ -58,6 +66,8 @@ struct MeetView: View {
         UserDefaults.standard.set(encoded, forKey: .accountKey)
     }
 }
+
+// MARK: - Constants
 
 private enum Constants {
     

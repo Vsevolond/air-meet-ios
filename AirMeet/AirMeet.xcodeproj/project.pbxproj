@@ -13,7 +13,7 @@
 		D3293BCE2BC1A59B001A9FC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3293BCD2BC1A59B001A9FC9 /* ViewController.swift */; };
 		D3293BD32BC1A59C001A9FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3293BD22BC1A59C001A9FC9 /* Assets.xcassets */; };
 		D3293BD62BC1A59C001A9FC9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D3293BD52BC1A59C001A9FC9 /* Base */; };
-		D37C7D7F2BECCD7000E6599A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D7E2BECCD7000E6599A /* Setting.swift */; };
+		D37C7D7F2BECCD7000E6599A /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D7E2BECCD7000E6599A /* ProfileSettings.swift */; };
 		D37C7D852BF0EAE800E6599A /* CGSize-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */; };
 		D38036332BE4153200A1D345 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38036322BE4153200A1D345 /* MainContainer.swift */; };
 		D380363C2BE4177800A1D345 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380363B2BE4177800A1D345 /* ChatsViewController.swift */; };
@@ -27,11 +27,13 @@
 		D3863D102C4C0012009476A5 /* UIViewController-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D0F2C4C0012009476A5 /* UIViewController-Extensions.swift */; };
 		D3863D122C4C008C009476A5 /* EnvironmentValues-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D112C4C008C009476A5 /* EnvironmentValues-Extensions.swift */; };
 		D3863D162C4C43D0009476A5 /* MeetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D152C4C43D0009476A5 /* MeetView.swift */; };
+		D3863D1A2C4EA3A0009476A5 /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D192C4EA3A0009476A5 /* ProfileEditorView.swift */; };
+		D3863D1C2C4FF21D009476A5 /* EdgeInsets-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D1B2C4FF21D009476A5 /* EdgeInsets-Extensions.swift */; };
 		D3B28EE92BC6933A00C058D8 /* UIView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EE82BC6933A00C058D8 /* UIView-Extensions.swift */; };
 		D3B28EF02BC696E300C058D8 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EEF2BC696E300C058D8 /* AppColor.swift */; };
 		D3B28EF22BC698F400C058D8 /* UIColor-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EF12BC698F400C058D8 /* UIColor-Extensions.swift */; };
 		D3B28EF42BC6997B00C058D8 /* CGColor-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B28EF32BC6997B00C058D8 /* CGColor-Extensions.swift */; };
-		D3B7D2512C11DBFD00D71F73 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7D2502C11DBFD00D71F73 /* SettingsView.swift */; };
+		D3B7D2512C11DBFD00D71F73 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7D2502C11DBFD00D71F73 /* ProfileView.swift */; };
 		D3B7D2532C12160C00D71F73 /* FlexibleGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7D2522C12160C00D71F73 /* FlexibleGrid.swift */; };
 		D3B7D2572C12445800D71F73 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7D2562C12445800D71F73 /* SearchView.swift */; };
 		D3B7D2592C1246AA00D71F73 /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B7D2582C1246AA00D71F73 /* ConnectivityManager.swift */; };
@@ -57,7 +59,7 @@
 		D3293BD22BC1A59C001A9FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3293BD52BC1A59C001A9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3293BD72BC1A59C001A9FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D37C7D7E2BECCD7000E6599A /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		D37C7D7E2BECCD7000E6599A /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize-Extensions.swift"; sourceTree = "<group>"; };
 		D38036322BE4153200A1D345 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
 		D380363B2BE4177800A1D345 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
@@ -71,11 +73,13 @@
 		D3863D0F2C4C0012009476A5 /* UIViewController-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController-Extensions.swift"; sourceTree = "<group>"; };
 		D3863D112C4C008C009476A5 /* EnvironmentValues-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues-Extensions.swift"; sourceTree = "<group>"; };
 		D3863D152C4C43D0009476A5 /* MeetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetView.swift; sourceTree = "<group>"; };
+		D3863D192C4EA3A0009476A5 /* ProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorView.swift; sourceTree = "<group>"; };
+		D3863D1B2C4FF21D009476A5 /* EdgeInsets-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets-Extensions.swift"; sourceTree = "<group>"; };
 		D3B28EE82BC6933A00C058D8 /* UIView-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extensions.swift"; sourceTree = "<group>"; };
 		D3B28EEF2BC696E300C058D8 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		D3B28EF12BC698F400C058D8 /* UIColor-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extensions.swift"; sourceTree = "<group>"; };
 		D3B28EF32BC6997B00C058D8 /* CGColor-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGColor-Extensions.swift"; sourceTree = "<group>"; };
-		D3B7D2502C11DBFD00D71F73 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D3B7D2502C11DBFD00D71F73 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D3B7D2522C12160C00D71F73 /* FlexibleGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleGrid.swift; sourceTree = "<group>"; };
 		D3B7D2562C12445800D71F73 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D3B7D2582C1246AA00D71F73 /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
@@ -155,13 +159,14 @@
 			path = Connectivity;
 			sourceTree = "<group>";
 		};
-		D38036362BE416EA00A1D345 /* Settings */ = {
+		D38036362BE416EA00A1D345 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				D37C7D7E2BECCD7000E6599A /* Setting.swift */,
-				D3B7D2502C11DBFD00D71F73 /* SettingsView.swift */,
+				D37C7D7E2BECCD7000E6599A /* ProfileSettings.swift */,
+				D3B7D2502C11DBFD00D71F73 /* ProfileView.swift */,
+				D3863D192C4EA3A0009476A5 /* ProfileEditorView.swift */,
 			);
-			path = Settings;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		D38036372BE416F000A1D345 /* Chats */ = {
@@ -213,6 +218,7 @@
 				D3863D0D2C4BE729009476A5 /* UIApplication-Extensions.swift */,
 				D3863D0F2C4C0012009476A5 /* UIViewController-Extensions.swift */,
 				D3863D112C4C008C009476A5 /* EnvironmentValues-Extensions.swift */,
+				D3863D1B2C4FF21D009476A5 /* EdgeInsets-Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,7 +278,7 @@
 				D38036322BE4153200A1D345 /* MainContainer.swift */,
 				D38036382BE416FC00A1D345 /* Search */,
 				D38036372BE416F000A1D345 /* Chats */,
-				D38036362BE416EA00A1D345 /* Settings */,
+				D38036362BE416EA00A1D345 /* Profile */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -402,18 +408,20 @@
 				D3863D0C2C4836FA009476A5 /* PhotoEditorView.swift in Sources */,
 				D3B28EF42BC6997B00C058D8 /* CGColor-Extensions.swift in Sources */,
 				D3863D102C4C0012009476A5 /* UIViewController-Extensions.swift in Sources */,
+				D3863D1A2C4EA3A0009476A5 /* ProfileEditorView.swift in Sources */,
 				D3863D162C4C43D0009476A5 /* MeetView.swift in Sources */,
 				D380363C2BE4177800A1D345 /* ChatsViewController.swift in Sources */,
 				D3B7D25D2C1316DF00D71F73 /* AccountInfo.swift in Sources */,
 				D3DFE8E72BD02C0B000C6168 /* PhotoEditorViewController.swift in Sources */,
 				D3DFE8DF2BCFED56000C6168 /* Account.swift in Sources */,
 				D3B7D25F2C1339AF00D71F73 /* CGFloat-Extensions.swift in Sources */,
+				D3863D1C2C4FF21D009476A5 /* EdgeInsets-Extensions.swift in Sources */,
 				D3B7D2572C12445800D71F73 /* SearchView.swift in Sources */,
 				D3293BCE2BC1A59B001A9FC9 /* ViewController.swift in Sources */,
 				D3B7D2592C1246AA00D71F73 /* ConnectivityManager.swift in Sources */,
 				D3DFE8DD2BCF1059000C6168 /* Hobbie.swift in Sources */,
 				D38036332BE4153200A1D345 /* MainContainer.swift in Sources */,
-				D3B7D2512C11DBFD00D71F73 /* SettingsView.swift in Sources */,
+				D3B7D2512C11DBFD00D71F73 /* ProfileView.swift in Sources */,
 				D3B28EE92BC6933A00C058D8 /* UIView-Extensions.swift in Sources */,
 				D3B7D25B2C12FC5C00D71F73 /* SearchModel.swift in Sources */,
 				D3293BCA2BC1A59B001A9FC9 /* AppDelegate.swift in Sources */,
@@ -427,7 +435,7 @@
 				D3863D062C440E77009476A5 /* AdaptiveForegroundColorModifier.swift in Sources */,
 				D3B7D2532C12160C00D71F73 /* FlexibleGrid.swift in Sources */,
 				D37C7D852BF0EAE800E6599A /* CGSize-Extensions.swift in Sources */,
-				D37C7D7F2BECCD7000E6599A /* Setting.swift in Sources */,
+				D37C7D7F2BECCD7000E6599A /* ProfileSettings.swift in Sources */,
 				D3863D122C4C008C009476A5 /* EnvironmentValues-Extensions.swift in Sources */,
 				D3863D002C3D8733009476A5 /* DetailsView.swift in Sources */,
 				D3F425B92BD2E52F008AF954 /* UIImage-Extensions.swift in Sources */,

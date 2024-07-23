@@ -251,7 +251,7 @@ enum SportHobbie: String, CaseIterable, HobbieProtocol, HobbieTypeProtocol {
     case volleyball = "🏐 Волейбол"
     case basketball = "🏀 Баскетбол"
     case hockey = "🏒 Хоккей"
-    case athletics = "🥏 Лёегкая атлетика"
+    case athletics = "🥏 Лёгкая атлетика"
     case wightlifting = "🏋️ Тяжелая атлетика"
     case boxing = "🥊 Бокс"
     case iceSkate = "⛸️ Фигурное катание"
