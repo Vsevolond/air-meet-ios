@@ -1,8 +1,8 @@
 import SwiftUI
 
-// MARK: - AdaptiveForegroundColorModifier
+// MARK: - ForegroundColorModifier
 
-struct AdaptiveForegroundColorModifier: ViewModifier {
+struct ForegroundColorModifier: ViewModifier {
     
     @Environment(\.colorScheme) private var colorScheme
     

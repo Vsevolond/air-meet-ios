@@ -167,7 +167,7 @@ final class PhotoEditorViewController: UIViewController {
         let maskLayer = CAShapeLayer()
         maskLayer.path = outerPath.cgPath
         maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
-        maskLayer.fillColor = UIColor.appColor(.black).withAlphaComponent(0.4).cgColor
+        maskLayer.fillColor = UIColor.black.withAlphaComponent(0.4).cgColor
         maskView.layer.addSublayer(maskLayer)
     }
     

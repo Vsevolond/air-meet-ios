@@ -5,24 +5,21 @@ import SwiftUI
 
 final class MainContainer {
     
-    static func build(with account: Account) -> UIViewController {
-        if account.image == nil {
-            account.image = AccountHelper.shared.getImage()
-        }
+    static func build(with profile: UserProfile) -> UIViewController {
+        let usersManager = UsersManager(internalProfile: profile)
         
-        let connectivityManager = ConnectivityManager(discoveryInfo: account.discoveryInfo.dict)
-        
-        let searchModel = SearchModel(manager: connectivityManager)
+        let searchModel = SearchModel(usersManager: usersManager)
         let searchView = SearchView(model: searchModel)
         let searchViewController = UIHostingController(rootView: searchView)
         searchViewController.tabBarItem.title = Constants.searchTitle
         searchViewController.tabBarItem.image = .init(systemName: Constants.searchImageName)
         
-        let chatsViewController = ChatsViewController()
+        let chatsView = ChatsView()
+        let chatsViewController = UIHostingController(rootView: chatsView)
         chatsViewController.tabBarItem.title = Constants.chatsTitle
         chatsViewController.tabBarItem.image = .init(systemName: Constants.chatsImageName)
         
-        let profileView = ProfileView(account: account)
+        let profileView = ProfileView(profile: profile)
         let profileViewController = UIHostingController(rootView: profileView)
         profileViewController.tabBarItem.title = Constants.settingsTitle
         profileViewController.tabBarItem.image = .init(systemName: Constants.profileImageName)

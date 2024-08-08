@@ -1,14 +1,4 @@
-import UIKit
 import SwiftUI
-
-extension UIView {
-    
-    func addSubviews(_ subviews: [UIView]) {
-        subviews.forEach { subview in
-            addSubview(subview)
-        }
-    }
-}
 
 extension View {
     
@@ -27,19 +17,8 @@ extension View {
         .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
     }
     
-    public func foregroundLinearGradient(colors: [Color], startPoint: UnitPoint, endPoint: UnitPoint) -> some View {
-        self.overlay {
-            LinearGradient(
-                colors: colors,
-                startPoint: startPoint,
-                endPoint: endPoint
-            )
-            .mask(self)
-        }
-    }
-    
     func foregroundColor(light lightModeColor: Color, dark darkModeColor: Color) -> some View {
-        modifier(AdaptiveForegroundColorModifier(
+        modifier(ForegroundColorModifier(
             lightModeColor: lightModeColor,
             darkModeColor: darkModeColor
         ))
@@ -63,3 +42,4 @@ private struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
+

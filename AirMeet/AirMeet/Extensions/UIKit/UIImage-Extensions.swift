@@ -11,6 +11,4 @@ extension UIImage {
         
         return croppedImage
     }
-    
-    var base64String: String? { pngData()?.base64EncodedString() }
 }

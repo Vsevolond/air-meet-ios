@@ -4,47 +4,43 @@ import SwiftUI
 
 final class SearchModel: ObservableObject {
     
-    @Published var nearbyUsers: [String: AccountInfo] = [:]
-    @Published var invitations: [String: AccountInfo] = [:]
+    // MARK: - Private Properties
     
-    private var manager: ConnectivityManager
+    private let usersManager: UsersManager
     
-    var isSearchingStarted: Bool = false
+    @Published private var users: [String] = []
     
-    init(manager: ConnectivityManager) {
-        self.manager = manager
-        manager.searchDelegate = self
+    // MARK: - Internal Properties
+    
+    var isSearching: Bool = false
+    
+    var nearbyUsers: [UserProfile] { users.compactMap { usersManager.getProfile(ofUser: $0) } }
+    
+    // MARK: - Initializers
+    
+    init(usersManager: UsersManager) {
+        self.usersManager = usersManager
+        usersManager.searchDelegate = self
     }
     
     func startSearching() {
-        manager.startAdvertising()
-        manager.startBrowsing()
-        
-        isSearchingStarted = true
-    }
-    
-    func didReceiveInvitation(from userID: String) {
-        print("invitation from: \(userID)")
-    }
-    
-    func invite(userID: String) {
-        manager.invitePeer(with: userID)
+        isSearching = true
+        usersManager.startSearching()
     }
 }
 
 // MARK: - Extensions
 
-extension SearchModel: ConnectivitySearchDelegate {
+extension SearchModel: UsersManagerSearchDelegate {
     
-    func didFound(id: String, with info: [String : String]) {
-        guard let info = AccountInfo(dict: info) else {
-            print("cannot get info: \(info)")
-            return
+    func didFound(user userID: String) {
+        withAnimation {
+            users.insert(userID, at: 0)
         }
-        nearbyUsers[id] = info
     }
     
-    func didLost(id: String) {
-        nearbyUsers.removeValue(forKey: id)
+    func didLost(user userID: String) {
+        guard let index = users.firstIndex(of: userID) else { return }
+        users.remove(at: index)
     }
 }

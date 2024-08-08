@@ -8,7 +8,7 @@ struct MeetView: View {
     // MARK: - Private Properties
     
     @Environment(\.viewController) private var viewController: UIViewController?
-    @StateObject private var account: Account = .init()
+    @StateObject private var profile: UserProfile = .init(id: .deviceIdentifier ?? .uuid)
     @State private var animationMode: LottiePlaybackMode = .paused
     @State private var isOnboardingPresented: Bool = false
     
@@ -36,7 +36,7 @@ struct MeetView: View {
             })
             .padding(.bottom, 25)
             .navigationDestination(isPresented: $isOnboardingPresented) {
-                DetailsView(account: account, isPresented: $isOnboardingPresented)
+                DetailsView(profile: profile, isPresented: $isOnboardingPresented)
             }
         }
         .onAppear {
@@ -47,23 +47,11 @@ struct MeetView: View {
         }
         .onChange(of: isOnboardingPresented) {
             guard !isOnboardingPresented else { return }
-            saveAccount()
+            ProfileSaver.shared.saveProfile(profile)
             
-            let mainViewController = MainContainer.build(with: account)
+            let mainViewController = MainContainer.build(with: profile)
             viewController?.present(style: .overFullScreen, transitionStyle: .crossDissolve, viewController: mainViewController)
         }
-    }
-    
-    // MARK: - Private Methods
-    
-    private func saveAccount() {
-        guard let image = account.image, let encoded = try? JSONEncoder().encode(account) else { return }
-        
-        DispatchQueue.global().async {
-            AccountHelper.shared.saveImage(image)
-        }
-        
-        UserDefaults.standard.set(encoded, forKey: .accountKey)
     }
 }
 

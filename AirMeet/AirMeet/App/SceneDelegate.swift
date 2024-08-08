@@ -12,10 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: scene)
         
-        if let data = UserDefaults.standard.object(forKey: .accountKey) as? Data,
-           let account = try? JSONDecoder().decode(Account.self, from: data) 
-        {
-            let mainViewController = MainContainer.build(with: account)
+        if let profile = ProfileSaver.shared.getProfile() {
+            let mainViewController = MainContainer.build(with: profile)
             window?.rootViewController = mainViewController
             
         } else {

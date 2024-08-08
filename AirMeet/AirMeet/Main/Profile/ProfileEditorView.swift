@@ -10,7 +10,7 @@ struct ProfileEditorView: View {
     
     // MARK: - Internal Properties
     
-    @ObservedObject var account: Account
+    @ObservedObject var profile: UserProfile
     
     // MARK: - Private Properties
     
@@ -32,11 +32,11 @@ struct ProfileEditorView: View {
                 .listRowBackground(Color.clear)
                 
                 Section {
-                    TextField(Constants.nameTitle, text: $account.name)
+                    TextField(Constants.nameTitle, text: $profile.name)
                         .bold()
                         .submitLabel(.done)
                     
-                    TextField(Constants.surnameTitle, text: $account.surname)
+                    TextField(Constants.surnameTitle, text: $profile.surname)
                         .bold()
                         .submitLabel(.done)
                 }
@@ -70,7 +70,8 @@ struct ProfileEditorView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(Constants.doneTitle) {
-                        saveAccount()
+                        
+                        ProfileSaver.shared.saveProfile(profile)
                         viewController?.dismiss(animated: true)
                     }
                     .bold()
@@ -86,7 +87,7 @@ struct ProfileEditorView: View {
         .onChange(of: editingImage, {
             viewController?.present(style: .fullScreen, transitionStyle: .crossDissolve, builder: {
                 PhotoEditorView(image: $editingImage) { image in
-                    account.image = image
+                    profile.image = image
                 }
                 .ignoresSafeArea()
             })
@@ -106,7 +107,7 @@ struct ProfileEditorView: View {
                 isImagePickerPresented.toggle()
                 
             }, label: {
-                Image(uiImage: account.image ?? .init())
+                Image(uiImage: profile.image ?? .init())
                     .resizable()
                     .scaledToFill()
                     .frame(width: .screenWidth * 0.5, height: .screenWidth * 0.5)
@@ -131,7 +132,7 @@ struct ProfileEditorView: View {
                     
                     Spacer()
                     
-                    Text(account.birthdateString)
+                    Text(profile.birthdateString)
                         .bold()
                         .if(isDatePickerPresented, then: { text in
                             text.foregroundStyle(.blue)
@@ -142,7 +143,7 @@ struct ProfileEditorView: View {
             })
             
             if isDatePickerPresented {
-                DatePicker(Constants.birthdateTitle, selection: $account.birthdate, in: ...Date(), displayedComponents: .date)
+                DatePicker(Constants.birthdateTitle, selection: $profile.birthdate, in: ...Date(), displayedComponents: .date)
                     .bold()
                     .environment(\.locale, Constants.locale)
                     .datePickerStyle(.wheel)
@@ -151,7 +152,7 @@ struct ProfileEditorView: View {
     }
     
     private var HobbiesGridView: some View {
-        FlexibleGrid(data: account.hobbies, spacing: 10, alignment: .leading) { hobbie in
+        FlexibleGrid(data: profile.hobbies, spacing: 10, alignment: .leading) { hobbie in
             Text(hobbie.title)
                 .font(.system(size: 12))
                 .bold()
@@ -175,7 +176,7 @@ struct ProfileEditorView: View {
             .font(.system(size: 14))
             .bold()
             .navigationDestination(isPresented: $isHobbiesPickerPresented) {
-                HobbiesView(account: account, isPresented: $isHobbiesPickerPresented, isOnboarding: false)
+                HobbiesView(profile: profile, isPresented: $isHobbiesPickerPresented, isOnboarding: false)
             }
         }
     }
@@ -191,20 +192,6 @@ struct ProfileEditorView: View {
             }
         }
     }
-    
-    private func saveAccount() {
-        guard let image = account.image, let encoded = try? JSONEncoder().encode(account) else { return }
-        
-        DispatchQueue.global().async {
-            AccountHelper.shared.saveImage(image)
-        }
-        
-        UserDefaults.standard.set(encoded, forKey: .accountKey)
-    }
-}
-
-#Preview {
-    ProfileEditorView(account: .init(name: "Всеволод", surname: "Донченко", birthdate: .now, hobbies: [.activeLifestyle(.bowling), .creativity(.dancing), .filmsAndSerials(.adventures), .foodAndDrinks(.bakery), .homeTime(.automobiles), .music(.blues), .socialLife(.activeRest), .sport(.athletics)], image: .test))
 }
 
 // MARK: - Constants

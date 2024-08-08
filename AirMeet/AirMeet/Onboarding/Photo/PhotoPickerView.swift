@@ -3,7 +3,7 @@ import PhotosUI
 
 struct PhotoPickerView: View {
     
-    @ObservedObject var account: Account
+    @ObservedObject var profile: UserProfile
     @Binding var isPresented: Bool
     
     @Environment(\.viewController) private var viewController: UIViewController?
@@ -13,7 +13,7 @@ struct PhotoPickerView: View {
     var body: some View {
         ZStack {
             VStack {
-                if let image = account.image {
+                if let image = profile.image {
                     UserImage(image)
                         .padding(.top)
                     
@@ -34,7 +34,7 @@ struct PhotoPickerView: View {
                         .bold()
                         .padding(10)
                         .foregroundStyle(.white)
-                        .if(account.image == nil, then: { view in
+                        .if(profile.image == nil, then: { view in
                             view.background(.gray.secondary)
                         }, else: { view in
                             view.background(.blue)
@@ -42,7 +42,7 @@ struct PhotoPickerView: View {
                         .clipShape(.rect(cornerRadius: 10))
                         .padding(.bottom, 20)
                 })
-                .disabled(account.image == nil)
+                .disabled(profile.image == nil)
             }
         }
         .sheet(isPresented: $isPickerPresented, content: {
@@ -53,7 +53,7 @@ struct PhotoPickerView: View {
         .onChange(of: editingImage, {
             viewController?.present(style: .fullScreen, transitionStyle: .crossDissolve, builder: {
                 PhotoEditorView(image: $editingImage) { image in
-                    account.image = image
+                    profile.image = image
                 }
                 .ignoresSafeArea()
             })

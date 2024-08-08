@@ -30,7 +30,7 @@ struct DetailsView: View {
 
     // MARK: - Internal Properties
     
-    @ObservedObject var account: Account
+    @ObservedObject var profile: UserProfile
     @Binding var isPresented: Bool
     
     // MARK: - Private Properties
@@ -47,27 +47,27 @@ struct DetailsView: View {
                     .foregroundStyle(.blue)
                     .frame(width: .screenWidth, height: .screenWidth)
                 
-                InputTextField(Constants.nameTitle, text: $account.name)
+                InputTextField(Constants.nameTitle, text: $profile.name)
                     .padding(.horizontal)
                     .padding(.top)
                     .submitLabel(.next)
                     .focused($focusedField, equals: .name)
                     .textContentType(.givenName)
-                    .onChange(of: account.name) {
+                    .onChange(of: profile.name) {
                         checkIsEmpty()
                     }
                 
-                InputTextField(Constants.surnameTitle, text: $account.surname)
+                InputTextField(Constants.surnameTitle, text: $profile.surname)
                     .padding(.horizontal)
                     .padding(.bottom)
                     .submitLabel(.done)
                     .focused($focusedField, equals: .surname)
                     .textContentType(.familyName)
-                    .onChange(of: account.surname) {
+                    .onChange(of: profile.surname) {
                         checkIsEmpty()
                     }
                 
-                DatePicker(Constants.birthdateTitle, selection: $account.birthdate, in: ...Date(), displayedComponents: .date)
+                DatePicker(Constants.birthdateTitle, selection: $profile.birthdate, in: ...Date(), displayedComponents: .date)
                     .bold()
                     .environment(\.locale, Constants.locale)
                     .padding(.horizontal, 10)
@@ -81,7 +81,7 @@ struct DetailsView: View {
             Spacer()
             
             NavigationLink {
-                HobbiesView(account: account, isPresented: $isPresented, isOnboarding: true)
+                HobbiesView(profile: profile, isPresented: $isPresented, isOnboarding: true)
                 
             } label: {
                 Text(Constants.buttonTitle)
@@ -126,7 +126,7 @@ struct DetailsView: View {
     }
     
     private func checkIsEmpty() {
-        guard !account.name.isEmpty, !account.surname.isEmpty else {
+        guard !profile.name.isEmpty, !profile.surname.isEmpty else {
             isFieldsEmpty = true
             return
         }

@@ -2,16 +2,18 @@ import SwiftUI
 
 struct HobbiesView: View {
     
-    @ObservedObject var account: Account
+    @ObservedObject var profile: UserProfile
     @Binding var isPresented: Bool
     var isOnboarding: Bool
+    
+    @State private var isPhotoPickerPresented: Bool = false
     
     var body: some View {
         VStack {
             List {
                 Section {
                     FlexibleGrid(data: CreativityHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.creativity(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.creativity(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.creativity(hobbie))
                             }
@@ -23,7 +25,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: ActiveLifestyleHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.activeLifestyle(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.activeLifestyle(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.activeLifestyle(hobbie))
                             }
@@ -35,7 +37,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: FoodAndDrinksHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.foodAndDrinks(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.foodAndDrinks(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.foodAndDrinks(hobbie))
                             }
@@ -47,7 +49,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: SocialLifeHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.socialLife(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.socialLife(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.socialLife(hobbie))
                             }
@@ -59,7 +61,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: FilmsAndSerialsHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.filmsAndSerials(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.filmsAndSerials(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.filmsAndSerials(hobbie))
                             }
@@ -71,7 +73,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: MusicHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.music(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.music(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.music(hobbie))
                             }
@@ -83,7 +85,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: HomeTimeHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.homeTime(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.homeTime(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.homeTime(hobbie))
                             }
@@ -95,7 +97,7 @@ struct HobbiesView: View {
                 
                 Section {
                     FlexibleGrid(data: SportHobbie.allCases, spacing: 12, alignment: .leading) { hobbie in
-                        HobbieItem(hobbie.title, isSelected: account.hobbies.contains(.sport(hobbie)))
+                        HobbieItem(hobbie.title, isSelected: profile.hobbies.contains(.sport(hobbie)))
                             .onTapGesture {
                                 toggleHobbie(.sport(hobbie))
                             }
@@ -108,23 +110,27 @@ struct HobbiesView: View {
             .listStyle(.plain)
             
             if isOnboarding {
-                NavigationLink {
-                    PhotoPickerView(account: account, isPresented: $isPresented)
+                Button(action: {
+                    isPhotoPickerPresented.toggle()
                     
-                } label: {
-                    Text(account.hobbies.isEmpty ? Constants.notAddButtonTitle : Constants.addButtonTitle)
+                }, label: {
+                    Text(Constants.buttonTitle)
                         .frame(width: .screenWidth * 0.75)
                         .font(.system(size: 18))
                         .bold()
                         .padding(10)
                         .foregroundStyle(.white)
-                        .if(account.hobbies.isEmpty, then: { view in
+                        .if(profile.hobbies.isEmpty, then: { view in
                             view.background(.gray.secondary)
                         }, else: { view in
                             view.background(.blue)
                         })
                         .clipShape(.rect(cornerRadius: 10))
                         .padding(.bottom, 10)
+                })
+                .disabled(profile.hobbies.isEmpty)
+                .navigationDestination(isPresented: $isPhotoPickerPresented) {
+                    PhotoPickerView(profile: profile, isPresented: $isPresented)
                 }
             }
 
@@ -137,7 +143,7 @@ struct HobbiesView: View {
                     Text(Constants.navigationTitle)
                         .font(.system(size: 20))
                         .bold()
-                    Text("Выбрано \(account.hobbies.count) из \(Constants.hobbiesCountLimit)")
+                    Text("Выбрано \(profile.hobbies.count) из \(Constants.hobbiesCountRange.upperBound)")
                         .font(.system(size: 14))
                         .foregroundStyle(.blue)
                 }
@@ -169,10 +175,11 @@ struct HobbiesView: View {
     }
     
     private func toggleHobbie(_ hobbie: Hobbie) {
-        if let index = account.hobbies.firstIndex(of: hobbie) {
-            account.hobbies.remove(at: index)
-        } else if account.hobbies.count < Constants.hobbiesCountLimit {
-            account.hobbies.append(hobbie)
+        if let index = profile.hobbies.firstIndex(of: hobbie) {
+            profile.hobbies.remove(at: index)
+            
+        } else if Constants.hobbiesCountRange.contains(profile.hobbies.count) {
+            profile.hobbies.append(hobbie)
         }
     }
 }
@@ -180,8 +187,7 @@ struct HobbiesView: View {
 private enum Constants {
     
     static let navigationTitle: String = "Интересы"
-    static let hobbiesCountLimit: Int = 10
+    static let hobbiesCountRange: ClosedRange<Int> = (0...10)
     
-    static let notAddButtonTitle: String = "Не добавлять"
-    static let addButtonTitle: String = "Добавить"
+    static let buttonTitle: String = "Добавить"
 }

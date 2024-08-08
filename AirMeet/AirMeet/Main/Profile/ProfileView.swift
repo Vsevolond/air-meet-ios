@@ -6,7 +6,7 @@ struct ProfileView: View {
     
     // MARK: - Internal Properties
     
-    @ObservedObject var account: Account
+    @ObservedObject var profile: UserProfile
     
     // MARK: - Private Properties
     
@@ -23,7 +23,7 @@ struct ProfileView: View {
                         let width = UIScreen.main.bounds.width
                         let offset = minY > 0 ? -minY : 0
                         
-                        Image(uiImage: account.image ?? .init())
+                        Image(uiImage: profile.image ?? .init())
                             .resizable()
                             .offset(x: offset / 2, y: offset)
                             .frame(width: width - offset, height: width - offset)
@@ -31,12 +31,12 @@ struct ProfileView: View {
                     .frame(width: .screenWidth, height: .screenWidth)
                     
                     VStack(alignment: .leading) {
-                        Text(account.fullName)
+                        Text(profile.fullName)
                             .font(.system(size: 20))
                             .bold()
                             .foregroundStyle(.white)
                         
-                        Text("• \(account.ageString)")
+                        Text("• \(profile.ageString)")
                             .font(.system(size: 16))
                             .foregroundStyle(.white)
                     }
@@ -44,7 +44,7 @@ struct ProfileView: View {
                     .padding(.leading, 10)
                 }
                 
-                FlexibleGrid(data: account.hobbies, spacing: 10, alignment: .leading) { hobbie in
+                FlexibleGrid(data: profile.hobbies, spacing: 10, alignment: .leading) { hobbie in
                     Text(hobbie.title)
                         .font(.system(size: 12))
                         .bold()
@@ -78,7 +78,7 @@ struct ProfileView: View {
             
             Button(action: {
                 viewController?.present(style: .overFullScreen, transitionStyle: .crossDissolve, builder: {
-                    ProfileEditorView(account: account)
+                    ProfileEditorView(profile: profile)
                 })
                 
             }, label: {
