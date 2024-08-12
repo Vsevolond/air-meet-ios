@@ -163,3 +163,8 @@ extension UserProfile: Equatable {
     
     static func == (lhs: UserProfile, rhs: UserProfile) -> Bool { lhs.id == rhs.id }
 }
+
+extension UserProfile: Hashable {
+    
+    func hash(into hasher: inout Hasher) { hasher.combine(id) }
+}

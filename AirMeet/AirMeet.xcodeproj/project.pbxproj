@@ -28,7 +28,7 @@
 		D3863D162C4C43D0009476A5 /* MeetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D152C4C43D0009476A5 /* MeetView.swift */; };
 		D3863D1A2C4EA3A0009476A5 /* ProfileEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D192C4EA3A0009476A5 /* ProfileEditorView.swift */; };
 		D3863D1C2C4FF21D009476A5 /* EdgeInsets-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3863D1B2C4FF21D009476A5 /* EdgeInsets-Extensions.swift */; };
-		D398E6C82C62883800CE6EFA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D398E6C72C62883800CE6EFA /* Message.swift */; };
+		D398E6C82C62883800CE6EFA /* MessageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D398E6C72C62883800CE6EFA /* MessageObject.swift */; };
 		D398E6CA2C628A8C00CE6EFA /* NearbyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D398E6C92C628A8C00CE6EFA /* NearbyManager.swift */; };
 		D398E6CC2C628AC400CE6EFA /* UsersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D398E6CB2C628AC400CE6EFA /* UsersManager.swift */; };
 		D398E6CE2C6290BE00CE6EFA /* ElasticTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D398E6CD2C6290BE00CE6EFA /* ElasticTabBar.swift */; };
@@ -47,6 +47,12 @@
 		D3DFE8DD2BCF1059000C6168 /* Hobbie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFE8DC2BCF1059000C6168 /* Hobbie.swift */; };
 		D3DFE8DF2BCFED56000C6168 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFE8DE2BCFED56000C6168 /* UserProfile.swift */; };
 		D3DFE8E72BD02C0B000C6168 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DFE8E62BD02C0B000C6168 /* PhotoEditorViewController.swift */; };
+		D3E6C9CF2C660C9300E789D1 /* ChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6C9CE2C660C9300E789D1 /* ChatsModel.swift */; };
+		D3E6C9D52C665CE500E789D1 /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6C9D42C665CE500E789D1 /* MessageItem.swift */; };
+		D3E6C9D72C665D8600E789D1 /* MessagesChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6C9D62C665D8600E789D1 /* MessagesChat.swift */; };
+		D3E6C9DB2C66865E00E789D1 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6C9DA2C66865E00E789D1 /* ChatView.swift */; };
+		D3E6C9DE2C68CF7100E789D1 /* NSNotification-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6C9DD2C68CF7100E789D1 /* NSNotification-Extensions.swift */; };
+		D3E6C9E22C694D7200E789D1 /* KeyboardHeightModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6C9E12C694D7200E789D1 /* KeyboardHeightModifier.swift */; };
 		D3E84BA82C51543C00E3013E /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E84BA72C51543C00E3013E /* ChatsView.swift */; };
 		D3F425B92BD2E52F008AF954 /* UIImage-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F425B82BD2E52F008AF954 /* UIImage-Extensions.swift */; };
 		D3F425BB2BD3023A008AF954 /* String-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F425BA2BD3023A008AF954 /* String-Extensions.swift */; };
@@ -79,7 +85,7 @@
 		D3863D152C4C43D0009476A5 /* MeetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetView.swift; sourceTree = "<group>"; };
 		D3863D192C4EA3A0009476A5 /* ProfileEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorView.swift; sourceTree = "<group>"; };
 		D3863D1B2C4FF21D009476A5 /* EdgeInsets-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets-Extensions.swift"; sourceTree = "<group>"; };
-		D398E6C72C62883800CE6EFA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D398E6C72C62883800CE6EFA /* MessageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageObject.swift; sourceTree = "<group>"; };
 		D398E6C92C628A8C00CE6EFA /* NearbyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyManager.swift; sourceTree = "<group>"; };
 		D398E6CB2C628AC400CE6EFA /* UsersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersManager.swift; sourceTree = "<group>"; };
 		D398E6CD2C6290BE00CE6EFA /* ElasticTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElasticTabBar.swift; sourceTree = "<group>"; };
@@ -98,6 +104,12 @@
 		D3DFE8DC2BCF1059000C6168 /* Hobbie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobbie.swift; sourceTree = "<group>"; };
 		D3DFE8DE2BCFED56000C6168 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		D3DFE8E62BD02C0B000C6168 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
+		D3E6C9CE2C660C9300E789D1 /* ChatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsModel.swift; sourceTree = "<group>"; };
+		D3E6C9D42C665CE500E789D1 /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
+		D3E6C9D62C665D8600E789D1 /* MessagesChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesChat.swift; sourceTree = "<group>"; };
+		D3E6C9DA2C66865E00E789D1 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		D3E6C9DD2C68CF7100E789D1 /* NSNotification-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification-Extensions.swift"; sourceTree = "<group>"; };
+		D3E6C9E12C694D7200E789D1 /* KeyboardHeightModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHeightModifier.swift; sourceTree = "<group>"; };
 		D3E84BA72C51543C00E3013E /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
 		D3F425B82BD2E52F008AF954 /* UIImage-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage-Extensions.swift"; sourceTree = "<group>"; };
 		D3F425BA2BD3023A008AF954 /* String-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-Extensions.swift"; sourceTree = "<group>"; };
@@ -186,6 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				D3E84BA72C51543C00E3013E /* ChatsView.swift */,
+				D3E6C9CE2C660C9300E789D1 /* ChatsModel.swift */,
+				D3E6C9DA2C66865E00E789D1 /* ChatView.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -233,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				D3F425BA2BD3023A008AF954 /* String-Extensions.swift */,
+				D3E6C9DD2C68CF7100E789D1 /* NSNotification-Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -283,8 +298,8 @@
 			children = (
 				D3DFE8DC2BCF1059000C6168 /* Hobbie.swift */,
 				D3DFE8DE2BCFED56000C6168 /* UserProfile.swift */,
-				D398E6C72C62883800CE6EFA /* Message.swift */,
 				D3AD0E2E2C5BC6910039BE28 /* TransferObject.swift */,
+				D3E6C9D32C665CB500E789D1 /* Message */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -296,6 +311,7 @@
 				D3B7D2522C12160C00D71F73 /* FlexibleGrid.swift */,
 				D3863D052C440E77009476A5 /* ForegroundColorModifier.swift */,
 				D398E6CD2C6290BE00CE6EFA /* ElasticTabBar.swift */,
+				D3E6C9E12C694D7200E789D1 /* KeyboardHeightModifier.swift */,
 			);
 			path = "Custom-Components";
 			sourceTree = "<group>";
@@ -310,6 +326,32 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		D3E6C9D02C6623C600E789D1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D398E6CB2C628AC400CE6EFA /* UsersManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		D3E6C9D32C665CB500E789D1 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				D398E6C72C62883800CE6EFA /* MessageObject.swift */,
+				D3E6C9D42C665CE500E789D1 /* MessageItem.swift */,
+				D3E6C9D62C665D8600E789D1 /* MessagesChat.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		D3E6C9DC2C68AA4400E789D1 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				D38036322BE4153200A1D345 /* MainContainer.swift */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
 		D3F425BE2BD31756008AF954 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,8 +363,8 @@
 		D3F425C12BD6C3CD008AF954 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D38036322BE4153200A1D345 /* MainContainer.swift */,
-				D398E6CB2C628AC400CE6EFA /* UsersManager.swift */,
+				D3E6C9DC2C68AA4400E789D1 /* Containers */,
+				D3E6C9D02C6623C600E789D1 /* Managers */,
 				D38036382BE416FC00A1D345 /* Search */,
 				D38036372BE416F000A1D345 /* Chats */,
 				D38036362BE416EA00A1D345 /* Profile */,
@@ -454,14 +496,17 @@
 			files = (
 				D3863D0C2C4836FA009476A5 /* PhotoEditorView.swift in Sources */,
 				D3863D102C4C0012009476A5 /* UIViewController-Extensions.swift in Sources */,
+				D3E6C9DB2C66865E00E789D1 /* ChatView.swift in Sources */,
 				D3863D1A2C4EA3A0009476A5 /* ProfileEditorView.swift in Sources */,
+				D3E6C9D72C665D8600E789D1 /* MessagesChat.swift in Sources */,
+				D3E6C9E22C694D7200E789D1 /* KeyboardHeightModifier.swift in Sources */,
 				D3863D162C4C43D0009476A5 /* MeetView.swift in Sources */,
 				D3DFE8E72BD02C0B000C6168 /* PhotoEditorViewController.swift in Sources */,
 				D3DFE8DF2BCFED56000C6168 /* UserProfile.swift in Sources */,
 				D3B7D25F2C1339AF00D71F73 /* CGFloat-Extensions.swift in Sources */,
 				D3AD0E2D2C5934490039BE28 /* NearbyObject.swift in Sources */,
 				D3863D1C2C4FF21D009476A5 /* EdgeInsets-Extensions.swift in Sources */,
-				D398E6C82C62883800CE6EFA /* Message.swift in Sources */,
+				D398E6C82C62883800CE6EFA /* MessageObject.swift in Sources */,
 				D3B7D2572C12445800D71F73 /* SearchView.swift in Sources */,
 				D3293BCE2BC1A59B001A9FC9 /* ViewController.swift in Sources */,
 				D3DFE8DD2BCF1059000C6168 /* Hobbie.swift in Sources */,
@@ -469,7 +514,10 @@
 				D3B7D2512C11DBFD00D71F73 /* ProfileView.swift in Sources */,
 				D3B28EE92BC6933A00C058D8 /* UIView-Extensions.swift in Sources */,
 				D3B7D25B2C12FC5C00D71F73 /* SearchModel.swift in Sources */,
+				D3E6C9DE2C68CF7100E789D1 /* NSNotification-Extensions.swift in Sources */,
+				D3E6C9CF2C660C9300E789D1 /* ChatsModel.swift in Sources */,
 				D3293BCA2BC1A59B001A9FC9 /* AppDelegate.swift in Sources */,
+				D3E6C9D52C665CE500E789D1 /* MessageItem.swift in Sources */,
 				D3863D0A2C47DA50009476A5 /* ImagePicker.swift in Sources */,
 				D3293BCC2BC1A59B001A9FC9 /* SceneDelegate.swift in Sources */,
 				D3863D0E2C4BE729009476A5 /* UIApplication-Extensions.swift in Sources */,

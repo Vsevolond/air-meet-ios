@@ -3,7 +3,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var mainContainer: MainContainer = MainContainer()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = .init(windowScene: scene)
         
         if let profile = ProfileSaver.shared.getProfile() {
-            let mainViewController = MainContainer.build(with: profile)
+            let mainViewController = mainContainer.build(with: profile)
             window?.rootViewController = mainViewController
             
         } else {

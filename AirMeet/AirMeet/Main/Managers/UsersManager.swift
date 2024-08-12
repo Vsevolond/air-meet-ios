@@ -1,36 +1,43 @@
-import Foundation
+import SwiftUI
+import Combine
 
-// MARK: - Users Manager Search Delegate
+// MARK: - Users Manager Delegate
 
-protocol UsersManagerSearchDelegate: AnyObject {
+protocol UsersManagerDelegate: AnyObject {
     
-    func didFound(user userID: String)
-    func didLost(user userID: String)
+    func didReceive(message messageData: Data, fromUser userID: String)
 }
 
 // MARK: - Users Manager
 
-final class UsersManager {
+final class UsersManager: ObservableObject {
+    
+    // MARK: - Type Properties
+    
+    enum UserState {
+        
+        case lost, found
+    }
     
     // MARK: - Internal Properties
     
-    weak var searchDelegate: UsersManagerSearchDelegate?
+    weak var delegate: UsersManagerDelegate?
+    
+    var statePublisher = PassthroughSubject<(userID: String, state: UserState), Never>()
     
     // MARK: - Private Properties
     
-    private let internalProfile: UserProfile
     private var nearbyUsers: [String: UserProfile] = [:]
     
-    private lazy var nearbyManager: NearbyManager = {
-        let manager = NearbyManager(userID: internalProfile.id, discoveryInfo: internalProfile.discoveryInfo)
-        manager.delegate = self
-        
-        return manager
-    }()
+    private let internalProfile: UserProfile
+    private let nearbyManager: NearbyManager
     
     // MARK: - Initializers
     
-    init(internalProfile: UserProfile) { self.internalProfile = internalProfile }
+    init(internalProfile: UserProfile, nearbyManager: NearbyManager) {
+        self.internalProfile = internalProfile
+        self.nearbyManager = nearbyManager
+    }
     
     // MARK: - Internal Methods
     
@@ -49,14 +56,12 @@ extension UsersManager: NearbyManagerDelegate {
     }
     
     func didLost(user userID: String) {
-        searchDelegate?.didLost(user: userID)
+        statePublisher.send((userID, .lost))
         nearbyUsers.removeValue(forKey: userID)
     }
     
     func didConnected(toUser userID: String) {
-        DispatchQueue.main.async { [weak self] in
-            self?.searchDelegate?.didFound(user: userID)
-        }
+        statePublisher.send((userID, .found))
         
         guard let additionalInfo = internalProfile.additionalInfo,
               let infoData = try? JSONEncoder().encode(additionalInfo)
@@ -79,8 +84,7 @@ extension UsersManager: NearbyManagerDelegate {
             }
             
         case .message:
-            guard let message = try? JSONDecoder().decode(Message.self, from: object.data) else { return }
-            print("message from user(\(userID)): \(message.value)")
+            delegate?.didReceive(message: object.data, fromUser: userID)
         }
     }
 }

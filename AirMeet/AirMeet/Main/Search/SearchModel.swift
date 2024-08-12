@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 // MARK: - Search Model
 
@@ -10,6 +11,8 @@ final class SearchModel: ObservableObject {
     
     @Published private var users: [String] = []
     
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: - Internal Properties
     
     var isSearching: Bool = false
@@ -20,27 +23,35 @@ final class SearchModel: ObservableObject {
     
     init(usersManager: UsersManager) {
         self.usersManager = usersManager
-        usersManager.searchDelegate = self
+        
+        usersManager.statePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (userID, state) in
+                self?.handle(user: userID, state: state)
+            }
+            .store(in: &cancellables)
     }
+    
+    // MARK: - Internal Methods
     
     func startSearching() {
         isSearching = true
         usersManager.startSearching()
     }
-}
-
-// MARK: - Extensions
-
-extension SearchModel: UsersManagerSearchDelegate {
     
-    func didFound(user userID: String) {
-        withAnimation {
-            users.insert(userID, at: 0)
+    // MARK: - Private Methods
+    
+    private func handle(user userID: String, state: UsersManager.UserState) {
+        switch state {
+            
+        case .lost:
+            guard let index = users.firstIndex(of: userID) else { return }
+            users.remove(at: index)
+            
+        case .found:
+            withAnimation {
+                users.insert(userID, at: 0)
+            }
         }
-    }
-    
-    func didLost(user userID: String) {
-        guard let index = users.firstIndex(of: userID) else { return }
-        users.remove(at: index)
     }
 }

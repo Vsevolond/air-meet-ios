@@ -4,9 +4,17 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    // MARK: - Type Properties
+    
+    enum ProfileType {
+        
+        case withSettings, forNearbyUser, common
+    }
+    
     // MARK: - Internal Properties
     
     @ObservedObject var profile: UserProfile
+    let type: ProfileType
     
     // MARK: - Private Properties
     
@@ -36,7 +44,7 @@ struct ProfileView: View {
                             .bold()
                             .foregroundStyle(.white)
                         
-                        Text("• \(profile.ageString)")
+                        Text(" \(profile.ageString)")
                             .font(.system(size: 16))
                             .foregroundStyle(.white)
                     }
@@ -54,45 +62,69 @@ struct ProfileView: View {
                 }
                 .listRowSeparator(.hidden)
                 
-                Section {
-                    ForEach(ProfileSettings.allCases, id: \.rawValue) { setting in
-                        HStack {
-                            Image(systemName: setting.imageName)
-                                .padding(1)
-                                .foregroundStyle(.white)
-                                .background(setting.imageColor)
-                                .clipShape(.rect(cornerRadius: 5))
-                                .padding(.trailing, 5)
-                            
-                            Text(setting.title)
-                                .font(.system(size: 16))
-                                .bold()
+                if type == .withSettings {
+                    Section {
+                        ForEach(ProfileSettings.allCases, id: \.rawValue) { setting in
+                            HStack {
+                                Image(systemName: setting.imageName)
+                                    .padding(1)
+                                    .foregroundStyle(.white)
+                                    .background(setting.imageColor)
+                                    .clipShape(.rect(cornerRadius: 5))
+                                    .padding(.trailing, 5)
+                                
+                                Text(setting.title)
+                                    .font(.system(size: 16))
+                                    .bold()
+                            }
+                            .padding(5)
                         }
-                        .padding(5)
+                    } header: {
+                        Text(Constants.settingsTitle)
                     }
-                } header: {
-                    Text(Constants.settingsTitle)
                 }
             }
             .listStyle(.plain)
             
-            Button(action: {
-                viewController?.present(style: .overFullScreen, transitionStyle: .crossDissolve, builder: {
-                    ProfileEditorView(profile: profile)
+            if type == .withSettings {
+                Button(action: {
+                    viewController?.present(style: .overFullScreen, transitionStyle: .crossDissolve, builder: {
+                        ProfileEditorView(profile: profile)
+                    })
+                    
+                }, label: {
+                    Text(Constants.changeTitle)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(.ultraThinMaterial, in: .capsule)
                 })
-                
-            }, label: {
-                Text(Constants.changeTitle)
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(.ultraThinMaterial, in: .capsule)
-            })
-            .padding(.top, 60)
-            .padding(.trailing, 10)
-
+                .padding(.top, 60)
+                .padding(.trailing, 10)
+            }
         }
         .ignoresSafeArea()
+        .if(type == .forNearbyUser, then: { view in
+            view.toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        NotificationCenter.default.post(name: .openChatKey, object: profile.id)
+                        
+                    } label: {
+                        Image(systemName: Constants.messageImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(.ultraThinMaterial, in: .capsule)
+                        
+                    }
+
+                }
+            }
+        })
     }
 }
 
@@ -102,6 +134,8 @@ private enum Constants {
     
     static let settingsTitle: String = "Настройки"
     static let changeTitle: String = "Изм."
+    
+    static let messageImage: String = "ellipsis.message.fill"
 }
 
 

@@ -71,7 +71,6 @@ extension NearbyManager: NearbyAdvertiserDelegate {
     
     func didReceiveInvitation(fromPeer peerID: MCPeerID, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         guard let nearbyObject = nearbyObjects[peerID.displayName] else { return }
-        print("received invitation from peer: \(peerID.displayName)")
         nearbyObject.handleInvitation(invitationHandler)
     }
 }

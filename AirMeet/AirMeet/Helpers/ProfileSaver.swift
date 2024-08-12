@@ -47,11 +47,13 @@ final class ProfileSaver {
 extension ProfileSaver: ProfileSaverProtocol {
     
     func saveProfile(_ profile: UserProfile) {
-        guard let encoded = try? JSONEncoder().encode(profile) else { return }
-        UserDefaults.standard.set(encoded, forKey: .profileKey)
-        
-        if let image = profile.image {
-            saveImage(image)
+        DispatchQueue.global().async { [weak self] in
+            guard let encoded = try? JSONEncoder().encode(profile) else { return }
+            UserDefaults.standard.set(encoded, forKey: .profileKey)
+            
+            if let image = profile.image {
+                self?.saveImage(image)
+            }
         }
     }
     

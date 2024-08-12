@@ -58,15 +58,15 @@ final class NearbyObject: NSObject {
     func didLost() { state.value = .lost }
     
     func handleInvitation(_ invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        guard state.value == .disconnected || state.value == .lost else { return } // lost???
+        guard state.value == .disconnected else { return }
         invitationHandler(true, session)
     }
     
     func send(object: TransferObject) {
         guard state.value == .connected, let data = try? JSONEncoder().encode(object) else { return }
+        
         do {
             try session.send(data, toPeers: [nearbyPeer], with: .reliable)
-            print("send data to peer: \(nearbyPeer.displayName)")
             
         } catch {
             print("error send data to peer: \(nearbyPeer.displayName)")
@@ -83,17 +83,9 @@ final class NearbyObject: NSObject {
     private func handleState(_ objectState: NearbyObjectState) {
         switch objectState {
             
-        case .lost: 
-            print("lost peer: \(nearbyPeer.displayName)")
-            session.disconnect()
-            
-        case .disconnected:
-            print("disconnected peer: \(nearbyPeer.displayName)")
-            delegate?.invite(peer: nearbyPeer, toSession: session)
-            
-        case .connected: 
-            print("connected peer: \(nearbyPeer.displayName)")
-            delegate?.didConnected(toPeer: nearbyPeer)
+        case .lost: session.disconnect()
+        case .disconnected: delegate?.invite(peer: nearbyPeer, toSession: session)
+        case .connected: delegate?.didConnected(toPeer: nearbyPeer)
             
         default: return
         }
@@ -117,7 +109,6 @@ extension NearbyObject: MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         guard let object = try? JSONDecoder().decode(TransferObject.self, from: data) else { return }
-        print("received data from peer: \(peerID.displayName)")
         delegate?.didReceive(object: object, fromPeer: peerID)
     }
     

@@ -7,6 +7,10 @@ extension View {
         UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
     
+    func keyboardHeight(_ state: Binding<CGFloat>) -> some View {
+        self.modifier(KeyboardHeightModifier(keyboardHeight: state))
+    }
+    
     func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
         background(
             GeometryReader { geometryProxy in
@@ -33,6 +37,17 @@ extension View {
             
         } else {
             elseTransform(self)
+        }
+    }
+    
+    @ViewBuilder func `if`<TrueContent: View>(
+        _ condition: Bool, then thenTransform: (Self) -> TrueContent) -> some View
+    {
+        if condition {
+            thenTransform(self)
+            
+        } else {
+            self
         }
     }
 }

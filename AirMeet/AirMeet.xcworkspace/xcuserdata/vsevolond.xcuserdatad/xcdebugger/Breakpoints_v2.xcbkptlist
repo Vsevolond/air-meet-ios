@@ -7,65 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "75DC9F69-77E2-452B-A0D0-BD5E45738DF8"
+            uuid = "BB887428-9ECD-48DD-80BC-7054628C6507"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirMeet/Main/UsersManager.swift"
+            filePath = "AirMeet/Main/Search/SearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "didReceive(object:fromUser:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "NearbyUserView(user:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8FADD36F-31A2-4617-BC04-67C578703AAF"
+            uuid = "14E0C48E-126F-4A5C-98F7-72F810DB53A9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirMeet/Connectivity/NearbyObject.swift"
+            filePath = "AirMeet/Main/Managers/UsersManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "session(_:didReceive:fromPeer:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "didConnected(toUser:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F340DC1C-6367-4835-8F1C-77497CAC2D35"
+            uuid = "08B47830-DF93-4922-BCB2-65ECDC20B4F6"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirMeet/Connectivity/NearbyObject.swift"
+            filePath = "AirMeet/Main/Chats/ChatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "send(object:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4278D8F9-21C3-41B3-9CC7-E516CC35078A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AirMeet/Main/UsersManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "didReceive(object:fromUser:)"
-            landmarkType = "7">
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

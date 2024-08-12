@@ -49,7 +49,8 @@ struct MeetView: View {
             guard !isOnboardingPresented else { return }
             ProfileSaver.shared.saveProfile(profile)
             
-            let mainViewController = MainContainer.build(with: profile)
+            let mainContainer = MainContainer()
+            let mainViewController = mainContainer.build(with: profile)
             viewController?.present(style: .overFullScreen, transitionStyle: .crossDissolve, viewController: mainViewController)
         }
     }
