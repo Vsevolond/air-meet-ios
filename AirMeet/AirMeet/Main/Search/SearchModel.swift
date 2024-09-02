@@ -26,8 +26,8 @@ final class SearchModel: ObservableObject {
         
         usersManager.statePublisher
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] (userID, state) in
-                self?.handle(user: userID, state: state)
+            .sink { [weak self] state in
+                self?.handle(state: state)
             }
             .store(in: &cancellables)
     }
@@ -41,14 +41,14 @@ final class SearchModel: ObservableObject {
     
     // MARK: - Private Methods
     
-    private func handle(user userID: String, state: UsersManager.UserState) {
+    private func handle(state: UsersManager.UserState) {
         switch state {
             
-        case .lost:
+        case .lost(let userID):
             guard let index = users.firstIndex(of: userID) else { return }
             users.remove(at: index)
             
-        case .found:
+        case .found(let userID):
             withAnimation {
                 users.insert(userID, at: 0)
             }

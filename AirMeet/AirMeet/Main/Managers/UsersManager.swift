@@ -16,18 +16,19 @@ final class UsersManager: ObservableObject {
     
     enum UserState {
         
-        case lost, found
+        case lost(_ userID: String)
+        case found(_ userID: String)
     }
     
     // MARK: - Internal Properties
     
     weak var delegate: UsersManagerDelegate?
     
-    var statePublisher = PassthroughSubject<(userID: String, state: UserState), Never>()
+    var statePublisher = PassthroughSubject<UserState, Never>()
     
     // MARK: - Private Properties
     
-    private var nearbyUsers: [String: UserProfile] = [:]
+    private var usersCache = NSCache<NSString, UserProfile>()
     
     private let internalProfile: UserProfile
     private let nearbyManager: NearbyManager
@@ -43,7 +44,9 @@ final class UsersManager: ObservableObject {
     
     func startSearching() { nearbyManager.start() }
     
-    func getProfile(ofUser userID: String) -> UserProfile? { nearbyUsers[userID] }
+    func getProfile(ofUser userID: String) -> UserProfile? {
+        usersCache.object(forKey: userID as NSString)
+    }
 }
 
 // MARK: - Extensions
@@ -51,17 +54,28 @@ final class UsersManager: ObservableObject {
 extension UsersManager: NearbyManagerDelegate {
     
     func didFound(user userID: String, withInfo discoveryInfo: [String : String]) {
-        guard nearbyUsers[userID] == nil, let profile = UserProfile(id: userID, discoveryInfo: discoveryInfo) else { return }
-        nearbyUsers[userID] = profile
+        guard usersCache.object(forKey: userID as NSString) == nil,
+              let profile = UserProfile(id: userID, discoveryInfo: discoveryInfo)
+        else {
+            return
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.usersCache.setObject(profile, forKey: userID as NSString)
+        }
     }
     
     func didLost(user userID: String) {
-        statePublisher.send((userID, .lost))
-        nearbyUsers.removeValue(forKey: userID)
+        DispatchQueue.main.async { [weak self] in
+            self?.statePublisher.send(.lost(userID))
+            self?.usersCache.removeObject(forKey: userID as NSString)
+        }
     }
     
     func didConnected(toUser userID: String) {
-        statePublisher.send((userID, .found))
+        DispatchQueue.main.async { [weak self] in
+            self?.statePublisher.send(.found(userID))
+        }
         
         guard let additionalInfo = internalProfile.additionalInfo,
               let infoData = try? JSONEncoder().encode(additionalInfo)
@@ -75,7 +89,7 @@ extension UsersManager: NearbyManagerDelegate {
         switch object.context {
             
         case .additionalInfo:
-            guard let nearbyUser = nearbyUsers[userID], nearbyUser.additionalInfo == nil,
+            guard let nearbyUser = usersCache.object(forKey: userID as NSString), nearbyUser.additionalInfo == nil,
                   let additionalInfo = try? JSONDecoder().decode(UserProfile.AdditionalInfo.self, from: object.data)
             else { return }
             
