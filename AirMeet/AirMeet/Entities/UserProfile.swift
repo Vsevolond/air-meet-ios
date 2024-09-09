@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 // MARK: - UserProfile
 
-final class UserProfile: Codable, ObservableObject {
+@Model
+final class UserProfile: Codable {
     
     // MARK: - Type Properties
     
@@ -37,7 +39,7 @@ final class UserProfile: Codable, ObservableObject {
         }
         
         init(from decoder: any Decoder) throws {
-            var container = try decoder.container(keyedBy: AdditionalCodingKeys.self)
+            let container = try decoder.container(keyedBy: AdditionalCodingKeys.self)
             
             self.hobbies = try container.decode([String].self, forKey: .hobbies).compactMap { Hobbie(from: $0) }
             
@@ -52,26 +54,36 @@ final class UserProfile: Codable, ObservableObject {
             
             try container.encode(hobbies.map { $0.title }, forKey: .hobbies)
             
-            guard let image, let imageData = image.jpegData(compressionQuality: 0.5) else { return } // todo: static quality
+            guard let image, let imageData = image.jpegData(compressionQuality: 0.2) else { return }
             try container.encode(imageData, forKey: .image)
         }
     }
     
     // MARK: - Internal Properties
     
-    let id: String
+    @Attribute(.unique) let id: String
+    @Attribute(.externalStorage) var imageData: Data?
     
-    @Published var name: String
-    @Published var surname: String
-    @Published var birthdate: Date
-    @Published var hobbies: [Hobbie]
-    @Published var image: UIImage?
+    var name: String
+    var surname: String
+    var birthdate: Date
+    var hobbies: [Hobbie]
     
-    var age: Int {
+    @Transient var image: UIImage? {
+        get {
+            guard let imageData else { return nil }
+            return UIImage(data: imageData)
+        }
+        set {
+            imageData = newValue?.jpegData(compressionQuality: 0.2)
+        }
+    }
+    
+    @Transient var age: Int {
         Calendar.current.dateComponents([.year], from: birthdate, to: .now).year ?? .zero
     }
     
-    var ageString: String {
+    @Transient var ageString: String {
         switch age {
         case let x where [0, 5, 6, 7, 8, 9].contains(x % 10) || (11...14).contains(x): "\(age) лет"
         case let x where x % 10 == 1: "\(age) год"
@@ -80,7 +92,7 @@ final class UserProfile: Codable, ObservableObject {
         }
     }
     
-    var birthdateString: String {
+    @Transient var birthdateString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "ru")
         dateFormatter.dateFormat = "dd MMM YYYY"
@@ -88,9 +100,9 @@ final class UserProfile: Codable, ObservableObject {
         return dateFormatter.string(from: birthdate)
     }
     
-    var fullName: String { "\(name) \(surname)"}
+    @Transient var fullName: String { "\(name) \(surname)"}
     
-    var discoveryInfo: [String: String] {
+    @Transient var discoveryInfo: [String: String] {
         [
             ProfileCodingKeys.name.rawValue : name,
             ProfileCodingKeys.surname.rawValue : surname,
@@ -98,7 +110,7 @@ final class UserProfile: Codable, ObservableObject {
         ]
     }
     
-    var additionalInfo: AdditionalInfo? { AdditionalInfo(hobbies: hobbies, image: image) }
+    @Transient var additionalInfo: AdditionalInfo? { AdditionalInfo(hobbies: hobbies, image: image) }
     
     // MARK: - Initializers
     
@@ -130,7 +142,7 @@ final class UserProfile: Codable, ObservableObject {
     }
     
     init(from decoder: any Decoder) throws {
-        var container = try decoder.container(keyedBy: ProfileCodingKeys.self)
+        let container = try decoder.container(keyedBy: ProfileCodingKeys.self)
         
         self.id = try container.decode(String.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
@@ -155,16 +167,4 @@ final class UserProfile: Codable, ObservableObject {
         self.hobbies = additionalInfo.hobbies
         self.image = additionalInfo.image
     }
-}
-
-// MARK: - Extensions
-
-extension UserProfile: Equatable {
-    
-    static func == (lhs: UserProfile, rhs: UserProfile) -> Bool { lhs.id == rhs.id }
-}
-
-extension UserProfile: Hashable {
-    
-    func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }

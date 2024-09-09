@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HobbiesView: View {
     
-    @ObservedObject var profile: UserProfile
+    @Bindable var profile: UserProfile
     @Binding var isPresented: Bool
     var isOnboarding: Bool
     

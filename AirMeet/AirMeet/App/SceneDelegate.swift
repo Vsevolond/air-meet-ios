@@ -1,9 +1,9 @@
 import SwiftUI
+import SwiftData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var mainContainer: MainContainer = MainContainer()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -12,12 +12,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = .init(windowScene: scene)
         
+        guard let container = try? ModelContainer(for: UserProfile.self, MessageData.self, Message.self, Chat.self) else {
+            fatalError("can't make container")
+        }
+        
         if let profile = ProfileSaver.shared.getProfile() {
-            let mainViewController = mainContainer.build(with: profile)
+            let mainViewController = MainContainer.build(with: profile, container: container)
             window?.rootViewController = mainViewController
             
         } else {
-            let onboardingViewController = UIHostingController(rootView: MeetView())
+            let onboardingViewController = UIHostingController(rootView: MeetView(container: container))
             window?.rootViewController = onboardingViewController
         }
         

@@ -1,11 +1,11 @@
 import SwiftUI
 import PhotosUI
 
+// MARK: - Chat View
+
 struct ChatView: View {
     
-    let user: UserProfile
-    @ObservedObject var chat: MessagesChat
-    @ObservedObject var model: ChatsModel
+    // MARK: - Private Properties
     
     @Environment(\.colorScheme) private var colorScheme
     
@@ -14,18 +14,20 @@ struct ChatView: View {
     @State private var isImagePickerPresented: Bool = false
     @State private var keyboardHeight: CGFloat = 0
     
-    init(userID: String, model: ChatsModel) {
-        self.model = model
-        
-        self.user = model.getProfile(ofUser: userID)
-        self.chat = model.getChat(withUser: userID)
-    }
+    // MARK: - Internal Properties
+    
+    let chat: Chat
+    let nearbyManager: NearbyManager
+    
+    @ObservationIgnored let dataSource: DataSource
+    
+    // MARK: - View Body
     
     var body: some View {
         VStack {
             List {
-                ForEach(chat.messages, id: \.self) { messageObject in
-                    MessageView(object: messageObject.message, type: messageObject.type)
+                ForEach(chat.messages.sorted(by: { $0.date < $1.date }), id: \.id) { message in
+                    MessageView(message: message)
                         .listRowSeparator(.hidden)
                         .transition(.slide)
                         .animation(.snappy, value: chat.messages)
@@ -48,9 +50,9 @@ struct ChatView: View {
                         isImagePickerPresented.toggle()
                         
                     } else {
-                        guard let object = MessageObject(text: inputText) else { return }
-                        model.send(message: object, toUser: user.id)
+                        guard let data = MessageData(text: inputText) else { return }
                         
+                        send(message: data)
                         inputText = ""
                     }
                     
@@ -87,6 +89,8 @@ struct ChatView: View {
             }
         })
         .toolbar {
+            let user = chat.user
+            
             ToolbarItem(placement: .principal) {
                 Button(action: {
                     isProfilePresented.toggle()
@@ -113,33 +117,38 @@ struct ChatView: View {
                 }
             }
         }
+        .toolbar(.hidden, for: .tabBar)
         .ignoresSafeArea(edges: .bottom)
         .keyboardHeight($keyboardHeight)
         .navigationDestination(isPresented: $isProfilePresented) {
-            ProfileView(profile: user, type: .common)
-        }
-        .onAppear {
-            NotificationCenter.default.post(name: .hideTabBarKey, object: nil)
-        }
-        .onDisappear {
-            NotificationCenter.default.post(name: .showTabBarKey, object: nil)
+            ProfileView(profile: chat.user, type: .common)
         }
     }
     
     private func processSelection(_ result: PHPickerResult) {
         let _ = result.itemProvider.loadDataRepresentation(for: .image) { data, _ in
-            guard let data, let image = UIImage(data: data), let object = MessageObject(image: image) else { return }
+            guard let data, let image = UIImage(data: data), let data = MessageData(image: image) else { return }
             
-            DispatchQueue.main.async {
-                model.send(message: object, toUser: user.id)
-            }
+            DispatchQueue.main.async { send(message: data) }
         }
     }
     
-    private func MessageView(object: MessageObject, type: MessageItem.MessageItemType) -> some View {
+    private func send(message messageData: MessageData) {
+        let message = Message(data: messageData, chatID: chat.id, type: .outcoming)
+        chat.add(message: message)
+        
+        Task.detached {
+            guard let data = try? JSONEncoder().encode(messageData) else { return }
+            let object = TransferObject(context: .message, data: data)
+            
+            nearbyManager.send(object: object, toUser: chat.id)
+        }
+    }
+
+    private func MessageView(message: Message) -> some View {
         HStack {
-            if type == .outcoming {
-                if object.type == .text {
+            if message.type == .outcoming {
+                if message.data.type == .text {
                     Spacer().frame(minWidth: 40)
                     
                 } else {
@@ -147,23 +156,23 @@ struct ChatView: View {
                 }
             }
             
-            if object.type == .text, let text = String(data: object.data, encoding: .utf8) {
-                TextMessageView(text: text, type: type)
+            if let text = message.data.value as? String {
+                TextMessageView(text: text, type: message.type)
                 
-            } else if object.type == .image, let image = UIImage(data: object.data) {
+            } else if let image = message.data.value as? UIImage {
                 ImageMessageView(image: image)
                 
             } else {
                 ErrorMessageView()
             }
             
-            if type == .incoming {
+            if message.type == .incoming {
                 Spacer().frame(width: 40)
             }
         }
     }
     
-    private func TextMessageView(text: String, type: MessageItem.MessageItemType) -> some View {
+    private func TextMessageView(text: String, type: Message.MessageType) -> some View {
         Text(text)
             .font(.callout)
             .bold()

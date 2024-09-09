@@ -1,71 +1,60 @@
-import Foundation
 import SwiftUI
+import SwiftData
 
 // MARK: - Chats Model
 
-final class ChatsModel: ObservableObject {
+final class ChatsModel: ObservableObject, UsersManagerDelegate {
     
-    // MARK: - Internal Properties
+    unowned var usersManager: UsersManager
+    unowned var nearbyManager: NearbyManager
     
-    private let nearbyManager: NearbyManager
-    @ObservedObject var usersManager: UsersManager
+    @ObservationIgnored let dataSource: DataSource
     
-    @Published var chats: [String: MessagesChat] = [:]
+    var chats: [Chat] = []
     
-    init(nearbyManager: NearbyManager, usersManager: UsersManager) {
-        self.nearbyManager = nearbyManager
+    init(usersManager: UsersManager, nearbyManager: NearbyManager, dataSource: DataSource) {
         self.usersManager = usersManager
+        self.nearbyManager = nearbyManager
+        self.dataSource = dataSource
+        self.chats = dataSource.fetchChats()
     }
     
-    func getProfile(ofUser userID: String) -> UserProfile {
-        guard let profile = usersManager.getProfile(ofUser: userID) else {
-            fatalError("cannot find user's profile")
-        }
-        
-        return profile
-    }
-    
-    func getChat(withUser userID: String) -> MessagesChat {
-        if let chat = chats[userID] {
+    func getChat(withUser userID: String) -> Chat? {
+        if let chat = chats.first(where: { $0.id == userID }) {
             return chat
             
         } else {
-            let chat = MessagesChat(id: userID)
-            chats[userID] = chat
+            guard let user = usersManager.getProfile(ofUser: userID) else { return nil }
+            
+            let chat = Chat(withUser: user)
+            dataSource.appendChat(chat)
+            
+            chats = dataSource.fetchChats()
             
             return chat
         }
     }
     
-    func send(message messageObject: MessageObject, toUser userID: String) {
-        guard let chat = chats[userID] else { return }
-        chat.add(message: messageObject, type: .outcoming)
-        
-        DispatchQueue.global().async { [weak self] in
-            guard let data = try? JSONEncoder().encode(messageObject) else { return }
-            let transferObject = TransferObject(context: .message, data: data)
+    func didReceive(message messageData: MessageData, fromUser userID: String) {
+        if let chat = chats.first(where: { $0.id == userID }) {
+            let message = Message(data: messageData, chatID: chat.id, type: .incoming)
             
-            self?.nearbyManager.send(object: transferObject, toUser: userID)
-        }
-    }
-}
-
-extension ChatsModel: UsersManagerDelegate {
-    
-    func didReceive(message messageData: Data, fromUser userID: String) {
-        guard let messageObject = try? JSONDecoder().decode(MessageObject.self, from: messageData) else { return }
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
+            DispatchQueue.main.async {
+                chat.add(message: message)
+            }
             
-            if let chat = chats[userID] {
-                chat.add(message: messageObject, type: .incoming)
+        } else {
+            guard let user = usersManager.getProfile(ofUser: userID) else { return }
+            
+            let chat = Chat(withUser: user)
+            let message = Message(data: messageData, chatID: chat.id, type: .incoming)
+            chat.add(message: message)
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
                 
-            } else {
-                let chat = MessagesChat(id: userID)
-                chat.add(message: messageObject, type: .incoming)
-                
-                chats[userID] = chat
+                dataSource.appendChat(chat)
+                chats = dataSource.fetchChats()
             }
         }
     }

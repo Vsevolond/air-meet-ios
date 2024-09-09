@@ -3,7 +3,7 @@ import PhotosUI
 
 struct PhotoPickerView: View {
     
-    @ObservedObject var profile: UserProfile
+    @Bindable var profile: UserProfile
     @Binding var isPresented: Bool
     
     @Environment(\.viewController) private var viewController: UIViewController?

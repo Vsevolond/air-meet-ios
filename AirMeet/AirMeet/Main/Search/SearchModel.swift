@@ -8,16 +8,12 @@ final class SearchModel: ObservableObject {
     // MARK: - Private Properties
     
     private let usersManager: UsersManager
-    
-    @Published private var users: [String] = []
-    
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Internal Properties
     
+    @Published var nearbyUsers: [String] = []
     var isSearching: Bool = false
-    
-    var nearbyUsers: [UserProfile] { users.compactMap { usersManager.getProfile(ofUser: $0) } }
     
     // MARK: - Initializers
     
@@ -32,6 +28,8 @@ final class SearchModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func profile(ofUser userID: String) -> UserProfile? { usersManager.getProfile(ofUser: userID) }
+    
     // MARK: - Internal Methods
     
     func startSearching() {
@@ -45,12 +43,12 @@ final class SearchModel: ObservableObject {
         switch state {
             
         case .lost(let userID):
-            guard let index = users.firstIndex(of: userID) else { return }
-            users.remove(at: index)
+            guard let index = nearbyUsers.firstIndex(of: userID) else { return }
+            nearbyUsers.remove(at: index)
             
         case .found(let userID):
             withAnimation {
-                users.insert(userID, at: 0)
+                nearbyUsers.insert(userID, at: 0)
             }
         }
     }
