@@ -29,7 +29,11 @@ struct ChatsView: View {
                     } label: {
                         ChatRow(for: chat)
                     }
-                }
+                }.onDelete(perform: { indexes in
+                    for index in indexes {
+                        model.deleteChat(index: index)
+                    }
+                })
             }
             .listStyle(.plain)
             .navigationTitle(Constants.navigationTitle)

@@ -1,38 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "BEB04C31-CEBF-4A76-AABB-D19979227054"
+   uuid = "097EAEFA-3BEB-4560-BF02-9D288A7F6CF2"
    type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "14E0C48E-126F-4A5C-98F7-72F810DB53A9"
+            uuid = "64AF52F4-86D1-4A57-80EA-399F6FF624D6"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirMeet/Main/Managers/UsersManager.swift"
+            filePath = "AirMeet/Main/Chats/ChatsModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "didConnected(toUser:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "didReceive(message:fromUser:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4223F7B2-CAD8-4396-B275-8FC038792D47"
+            uuid = "461DCC4B-633B-4E20-87A7-FCFC91156968"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirMeet/App/SceneDelegate.swift"
+            filePath = "AirMeet/Main/Chats/ChatsModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "scene(_:willConnectTo:options:)"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "didReceive(message:fromUser:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B2F00FE-7D50-4DFC-BD62-4E5D29DB5046"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirMeet/Main/Chats/ChatsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6A289B1F-4BE1-4B08-BCCE-3FF105744715"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirMeet/Main/Chats/ChatsModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "deleteChat(index:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

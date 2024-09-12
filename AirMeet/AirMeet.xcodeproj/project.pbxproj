@@ -10,12 +10,12 @@
 		7594A40F53F15AEB88B839B8 /* Pods_AirMeet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4BBC12A53407A52F1B5B59 /* Pods_AirMeet.framework */; };
 		D3293BCA2BC1A59B001A9FC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3293BC92BC1A59B001A9FC9 /* AppDelegate.swift */; };
 		D3293BCC2BC1A59B001A9FC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3293BCB2BC1A59B001A9FC9 /* SceneDelegate.swift */; };
-		D3293BCE2BC1A59B001A9FC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3293BCD2BC1A59B001A9FC9 /* ViewController.swift */; };
 		D3293BD32BC1A59C001A9FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3293BD22BC1A59C001A9FC9 /* Assets.xcassets */; };
 		D3293BD62BC1A59C001A9FC9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D3293BD52BC1A59C001A9FC9 /* Base */; };
 		D33198822C8A2C8C0021CA98 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33198812C8A2C8C0021CA98 /* Chat.swift */; };
 		D35822902C8C91090011204B /* ChatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D358228F2C8C91090011204B /* ChatsModel.swift */; };
 		D35822A12C8DDA580011204B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35822A02C8DDA580011204B /* DataSource.swift */; };
+		D35BD7992C92351E001204A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35BD7982C92351E001204A5 /* User.swift */; };
 		D37C7D7F2BECCD7000E6599A /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D7E2BECCD7000E6599A /* ProfileSettings.swift */; };
 		D37C7D852BF0EAE800E6599A /* CGSize-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */; };
 		D38036332BE4153200A1D345 /* MainContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38036322BE4153200A1D345 /* MainContainer.swift */; };
@@ -67,13 +67,13 @@
 		D3293BC62BC1A59B001A9FC9 /* AirMeet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirMeet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3293BC92BC1A59B001A9FC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3293BCB2BC1A59B001A9FC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D3293BCD2BC1A59B001A9FC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D3293BD22BC1A59C001A9FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3293BD52BC1A59C001A9FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3293BD72BC1A59C001A9FC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D33198812C8A2C8C0021CA98 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		D358228F2C8C91090011204B /* ChatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsModel.swift; sourceTree = "<group>"; };
 		D35822A02C8DDA580011204B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		D35BD7982C92351E001204A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D37C7D7E2BECCD7000E6599A /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		D37C7D842BF0EAE800E6599A /* CGSize-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize-Extensions.swift"; sourceTree = "<group>"; };
 		D38036322BE4153200A1D345 /* MainContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainer.swift; sourceTree = "<group>"; };
@@ -169,7 +169,6 @@
 				D3B28EE72BC6930600C058D8 /* Extensions */,
 				D3B28EE62BC692E700C058D8 /* Storyboards */,
 				D3B28EE42BC6928C00C058D8 /* App */,
-				D3293BCD2BC1A59B001A9FC9 /* ViewController.swift */,
 				D3293BD72BC1A59C001A9FC9 /* Info.plist */,
 			);
 			path = AirMeet;
@@ -189,6 +188,17 @@
 				D35822A02C8DDA580011204B /* DataSource.swift */,
 			);
 			path = DataSources;
+			sourceTree = "<group>";
+		};
+		D35BD7972C9234E2001204A5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D33198812C8A2C8C0021CA98 /* Chat.swift */,
+				D398E6C72C62883800CE6EFA /* Message.swift */,
+				D3DFE8DE2BCFED56000C6168 /* UserProfile.swift */,
+				D35BD7982C92351E001204A5 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D37C7D8C2BF2A1CA00E6599A /* Connectivity */ = {
@@ -314,10 +324,8 @@
 		D3DFE8DB2BCF1047000C6168 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D35BD7972C9234E2001204A5 /* Models */,
 				D3DFE8DC2BCF1059000C6168 /* Hobbie.swift */,
-				D3DFE8DE2BCFED56000C6168 /* UserProfile.swift */,
-				D398E6C72C62883800CE6EFA /* Message.swift */,
-				D33198812C8A2C8C0021CA98 /* Chat.swift */,
 				D3AD0E2E2C5BC6910039BE28 /* TransferObject.swift */,
 			);
 			path = Entities;
@@ -519,13 +527,13 @@
 				D3863D1C2C4FF21D009476A5 /* EdgeInsets-Extensions.swift in Sources */,
 				D398E6C82C62883800CE6EFA /* Message.swift in Sources */,
 				D3B7D2572C12445800D71F73 /* SearchView.swift in Sources */,
-				D3293BCE2BC1A59B001A9FC9 /* ViewController.swift in Sources */,
 				D3DFE8DD2BCF1059000C6168 /* Hobbie.swift in Sources */,
 				D38036332BE4153200A1D345 /* MainContainer.swift in Sources */,
 				D3B7D2512C11DBFD00D71F73 /* ProfileView.swift in Sources */,
 				D3B28EE92BC6933A00C058D8 /* UIView-Extensions.swift in Sources */,
 				D3B7D25B2C12FC5C00D71F73 /* SearchModel.swift in Sources */,
 				D3E6C9DE2C68CF7100E789D1 /* NSNotification-Extensions.swift in Sources */,
+				D35BD7992C92351E001204A5 /* User.swift in Sources */,
 				D3293BCA2BC1A59B001A9FC9 /* AppDelegate.swift in Sources */,
 				D3863D0A2C47DA50009476A5 /* ImagePicker.swift in Sources */,
 				D3293BCC2BC1A59B001A9FC9 /* SceneDelegate.swift in Sources */,

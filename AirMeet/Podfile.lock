@@ -1,42 +1,20 @@
 PODS:
-  - InternalCollectionsUtilities (1.1.1)
   - lottie-ios (4.3.3)
   - SnapKit (5.7.1)
-  - swift-collections (1.1.1):
-    - swift-collections/BitCollections (= 1.1.1)
-    - swift-collections/DequeModule (= 1.1.1)
-    - swift-collections/HashTreeCollections (= 1.1.1)
-    - swift-collections/HeapModule (= 1.1.1)
-    - swift-collections/OrderedCollections (= 1.1.1)
-  - swift-collections/BitCollections (1.1.1):
-    - InternalCollectionsUtilities (= 1.1.1)
-  - swift-collections/DequeModule (1.1.1):
-    - InternalCollectionsUtilities (= 1.1.1)
-  - swift-collections/HashTreeCollections (1.1.1):
-    - InternalCollectionsUtilities (= 1.1.1)
-  - swift-collections/HeapModule (1.1.1):
-    - InternalCollectionsUtilities (= 1.1.1)
-  - swift-collections/OrderedCollections (1.1.1):
-    - InternalCollectionsUtilities (= 1.1.1)
 
 DEPENDENCIES:
   - lottie-ios
   - SnapKit
-  - swift-collections
 
 SPEC REPOS:
   trunk:
-    - InternalCollectionsUtilities
     - lottie-ios
     - SnapKit
-    - swift-collections
 
 SPEC CHECKSUMS:
-  InternalCollectionsUtilities: af3f471602c4a67cbcb0bee0a80f6f55a33ae453
   lottie-ios: 25e7b2675dad5c3ddad369ac9baab03560c5bfdd
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  swift-collections: ba248ecaf44ef500b27d5cf94d304218c89892ff
 
-PODFILE CHECKSUM: c506404129c5159a2df088e75453cef064191a41
+PODFILE CHECKSUM: cf86bd5e7bd3b252d38b99fd938015f24caade51
 
 COCOAPODS: 1.13.0

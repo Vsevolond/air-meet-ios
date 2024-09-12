@@ -10,7 +10,7 @@ final class ChatsModel: ObservableObject, UsersManagerDelegate {
     
     @ObservationIgnored let dataSource: DataSource
     
-    var chats: [Chat] = []
+    @Published var chats: [Chat] = []
     
     init(usersManager: UsersManager, nearbyManager: NearbyManager, dataSource: DataSource) {
         self.usersManager = usersManager
@@ -35,13 +35,14 @@ final class ChatsModel: ObservableObject, UsersManagerDelegate {
         }
     }
     
+    func deleteChat(index: Int) {
+        dataSource.removeChat(chats[index])
+    }
+    
     func didReceive(message messageData: MessageData, fromUser userID: String) {
         if let chat = chats.first(where: { $0.id == userID }) {
             let message = Message(data: messageData, chatID: chat.id, type: .incoming)
-            
-            DispatchQueue.main.async {
-                chat.add(message: message)
-            }
+            chat.add(message: message)
             
         } else {
             guard let user = usersManager.getProfile(ofUser: userID) else { return }
@@ -50,12 +51,8 @@ final class ChatsModel: ObservableObject, UsersManagerDelegate {
             let message = Message(data: messageData, chatID: chat.id, type: .incoming)
             chat.add(message: message)
             
-            DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                
-                dataSource.appendChat(chat)
-                chats = dataSource.fetchChats()
-            }
+            dataSource.appendChat(chat)
+            chats = dataSource.fetchChats()
         }
     }
 }

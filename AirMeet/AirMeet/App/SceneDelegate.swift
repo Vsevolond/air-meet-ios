@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError("can't make container")
         }
         
+        print(FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!)
+        
         if let profile = ProfileSaver.shared.getProfile() {
             let mainViewController = MainContainer.build(with: profile, container: container)
             window?.rootViewController = mainViewController

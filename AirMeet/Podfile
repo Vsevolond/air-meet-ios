@@ -3,6 +3,5 @@ target 'AirMeet' do
 
   pod 'SnapKit'
   pod 'lottie-ios'
-  pod 'swift-collections'
 
 end
