@@ -12,7 +12,7 @@ final class Chat {
     
     var lastDate: Date
     
-    @Transient var lastMessage: Message? { messages.last }
+    @Transient var lastMessage: Message? { messages.sorted(by: { $0.date < $1.date }).last }
     
     // MARK: - Initializers
     

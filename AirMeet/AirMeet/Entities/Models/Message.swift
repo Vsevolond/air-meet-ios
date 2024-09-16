@@ -56,7 +56,7 @@ final class MessageData: Codable {
     let data: Data
     let type: MessageDataType
     
-    var value: Any? {
+    @Transient var value: Any? {
         switch type {
         case .text: return String(data: data, encoding: .utf8)
         case .image: return UIImage(data: data)

@@ -16,7 +16,7 @@ struct ChatView: View {
     
     // MARK: - Internal Properties
     
-    let chat: Chat
+    @Bindable var chat: Chat
     let nearbyManager: NearbyManager
     
     @ObservationIgnored let dataSource: DataSource
@@ -137,12 +137,10 @@ struct ChatView: View {
         let message = Message(data: messageData, chatID: chat.id, type: .outcoming)
         chat.add(message: message)
         
-        Task.detached {
-            guard let data = try? JSONEncoder().encode(messageData) else { return }
-            let object = TransferObject(context: .message, data: data)
-            
-            nearbyManager.send(object: object, toUser: chat.id)
-        }
+        guard let data = try? JSONEncoder().encode(messageData) else { return }
+        let object = TransferObject(context: .message, data: data)
+        
+        nearbyManager.send(object: object, toUser: chat.id)
     }
 
     private func MessageView(message: Message) -> some View {
@@ -158,9 +156,11 @@ struct ChatView: View {
             
             if let text = message.data.value as? String {
                 TextMessageView(text: text, type: message.type)
+                    .layoutPriority(1)
                 
             } else if let image = message.data.value as? UIImage {
                 ImageMessageView(image: image)
+                    .layoutPriority(1)
                 
             } else {
                 ErrorMessageView()

@@ -79,10 +79,29 @@ struct ChatsView: View {
                     .clipShape(.circle)
             }
             
-            Text(user.fullName)
-                .font(.callout)
-                .bold()
-                .foregroundColor(light: .black, dark: .white)
+            VStack(alignment: .leading) {
+                Text(user.fullName)
+                    .font(.callout)
+                    .bold()
+                    .foregroundColor(light: .black, dark: .white)
+                
+                if let message = chat.lastMessage {
+                    
+                    if let text = message.data.value as? String {
+                        Text(text)
+                            .font(.system(size: 12))
+                            .bold()
+                            .lineLimit(1)
+                            .foregroundStyle(.gray)
+                        
+                    } else if let image = message.data.value as? UIImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                    }
+                }
+            }
         }
     }
 }
