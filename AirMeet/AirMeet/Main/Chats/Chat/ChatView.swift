@@ -25,18 +25,28 @@ struct ChatView: View {
     
     var body: some View {
         VStack {
-            List {
-                ForEach(chat.messages.sorted(by: { $0.date < $1.date }), id: \.id) { message in
+            ScrollViewReader { scrollView in
+                List(chat.messages.sorted(by: { $0.date < $1.date }), id: \.id) { message in
                     MessageView(message: message)
                         .listRowSeparator(.hidden)
                         .transition(.slide)
                         .animation(.snappy, value: chat.messages)
                 }
-            }
-            .listStyle(.plain)
-            .if(colorScheme == .dark, then: { $0.background(.black) }, else: { $0.background(.white) })
-            .onTapGesture {
-                hideKeyboard()
+                .listStyle(.plain)
+                .if(colorScheme == .dark, then: { $0.background(.black) }, else: { $0.background(.white) })
+                .onTapGesture {
+                    hideKeyboard()
+                }
+                .onAppear {
+                    if let lastMessage = chat.lastMessage {
+                        scrollView.scrollTo(lastMessage.id, anchor: .bottom)
+                    }
+                }
+                .onChange(of: chat.messages) {
+                    if let lastMessage = chat.lastMessage {
+                        scrollView.scrollTo(lastMessage.id, anchor: .bottom)
+                    }
+                }
             }
             
             HStack(alignment: .bottom) {

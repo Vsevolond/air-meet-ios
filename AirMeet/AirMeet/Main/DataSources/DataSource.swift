@@ -35,9 +35,23 @@ final class DataSource {
 
     func removeChat(_ chat: Chat) {
         context.delete(chat)
+        
+        do {
+            try context.save()
+            
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
     
     func removeMessage(_ message: Message) {
         context.delete(message)
+        
+        do {
+            try context.save()
+            
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
 }

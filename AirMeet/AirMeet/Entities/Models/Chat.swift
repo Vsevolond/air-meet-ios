@@ -14,6 +14,8 @@ final class Chat {
     
     @Transient var lastMessage: Message? { messages.sorted(by: { $0.date < $1.date }).last }
     
+    @Transient var isEmpty: Bool { messages.isEmpty }
+    
     // MARK: - Initializers
     
     init(withUser user: UserProfile, messages: [Message] = [], lastDate: Date = .now) {

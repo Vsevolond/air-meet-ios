@@ -44,7 +44,9 @@ final class ChatsModel: ObservableObject, UsersManagerDelegate {
             let message = Message(data: messageData, chatID: chat.id, type: .incoming)
             
             DispatchQueue.main.async {
-                chat.add(message: message)
+                withAnimation {
+                    chat.add(message: message)
+                }
             }
             
         } else {
