@@ -1,22 +1,33 @@
-//
-//  SceneDelegate.swift
-//  AirMeet
-//
-//  Created by Всеволод Донченко on 06.04.2024.
-//
-
-import UIKit
+import SwiftUI
+import SwiftData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+        window = .init(windowScene: scene)
+        
+        guard let container = try? ModelContainer(for: UserProfile.self, MessageData.self, Message.self, Chat.self) else {
+            fatalError("can't make container")
+        }
+        
+        print(FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!)
+        
+        if let profile = ProfileSaver.shared.getProfile() {
+            let mainViewController = MainContainer.build(with: profile, container: container)
+            window?.rootViewController = mainViewController
+            
+        } else {
+            let onboardingViewController = UIHostingController(rootView: MeetView(container: container))
+            window?.rootViewController = onboardingViewController
+        }
+        
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
