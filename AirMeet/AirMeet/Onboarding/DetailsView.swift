@@ -30,7 +30,7 @@ struct DetailsView: View {
 
     // MARK: - Internal Properties
     
-    @ObservedObject var profile: UserProfile
+    @Bindable var profile: UserProfile
     @Binding var isPresented: Bool
     
     // MARK: - Private Properties

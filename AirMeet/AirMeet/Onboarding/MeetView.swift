@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import Lottie
 
 // MARK: - Meet View
@@ -8,9 +9,13 @@ struct MeetView: View {
     // MARK: - Private Properties
     
     @Environment(\.viewController) private var viewController: UIViewController?
-    @StateObject private var profile: UserProfile = .init(id: .deviceIdentifier ?? .uuid)
+    @State private var profile: UserProfile = .init(id: .deviceIdentifier ?? .uuid)
     @State private var animationMode: LottiePlaybackMode = .paused
     @State private var isOnboardingPresented: Bool = false
+    
+    // MARK: - Internal Properties
+    
+    let container: ModelContainer
     
     // MARK: - View Body
     
@@ -49,8 +54,7 @@ struct MeetView: View {
             guard !isOnboardingPresented else { return }
             ProfileSaver.shared.saveProfile(profile)
             
-            let mainContainer = MainContainer()
-            let mainViewController = mainContainer.build(with: profile)
+            let mainViewController = MainContainer.build(with: profile, container: container)
             viewController?.present(style: .overFullScreen, transitionStyle: .crossDissolve, viewController: mainViewController)
         }
     }

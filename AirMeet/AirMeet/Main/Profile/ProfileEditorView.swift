@@ -1,16 +1,13 @@
 import SwiftUI
 import PhotosUI
 
-// MARK: - TODO
-// - сохранение аккаунта только при изменении его свойств
-
 // MARK: - Profile Editor View
 
 struct ProfileEditorView: View {
     
     // MARK: - Internal Properties
     
-    @ObservedObject var profile: UserProfile
+    @Bindable var profile: UserProfile
     
     // MARK: - Private Properties
     

@@ -5,7 +5,7 @@ import Combine
 
 protocol UsersManagerDelegate: AnyObject {
     
-    func didReceive(message messageData: Data, fromUser userID: String)
+    func didReceive(message messageData: MessageData, fromUser userID: String)
 }
 
 // MARK: - Users Manager
@@ -98,7 +98,8 @@ extension UsersManager: NearbyManagerDelegate {
             }
             
         case .message:
-            delegate?.didReceive(message: object.data, fromUser: userID)
+            guard let messageData = try? JSONDecoder().decode(MessageData.self, from: object.data) else { return }
+            delegate?.didReceive(message: messageData, fromUser: userID)
         }
     }
 }

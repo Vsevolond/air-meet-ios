@@ -13,12 +13,13 @@ struct ProfileView: View {
     
     // MARK: - Internal Properties
     
-    @ObservedObject var profile: UserProfile
+    @Bindable var profile: UserProfile
     let type: ProfileType
     
     // MARK: - Private Properties
     
-    @Environment(\.viewController) private var viewController: UIViewController?
+    @Environment(\.viewController) private var viewController
+    @Environment(\.tabSelection) private var tabSelection
     
     // MARK: - View Body
     
@@ -107,10 +108,11 @@ struct ProfileView: View {
         .if(type == .forNearbyUser, then: { view in
             view.toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        NotificationCenter.default.post(name: .openChatKey, object: profile.id)
+                    Button(action: {
+                        tabSelection.wrappedValue = .chats
+                        NotificationCenter.default.post(name: .openChat, object: profile.id)
                         
-                    } label: {
+                    }, label: {
                         Image(systemName: Constants.messageImage)
                             .resizable()
                             .scaledToFit()
@@ -119,9 +121,7 @@ struct ProfileView: View {
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
                             .background(.ultraThinMaterial, in: .capsule)
-                        
-                    }
-
+                    })
                 }
             }
         })
